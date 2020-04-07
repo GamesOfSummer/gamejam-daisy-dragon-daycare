@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5468777060904907146}
   - component: {fileID: 6068273035376101725}
+  - component: {fileID: 597955110}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
@@ -81,6 +82,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &597955110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3237510191270970077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff5b8df4dec40743b619658a6b9d13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ease: 0.15
 --- !u!1 &6269631408664805780
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +107,7 @@ GameObject:
   - component: {fileID: 7441781048528153778}
   - component: {fileID: 491515267423301163}
   - component: {fileID: 5171527887544448448}
+  - component: {fileID: 1520571012}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Untagged
@@ -176,3 +191,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1520571012
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269631408664805780}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8810c4faef35ce44ca3021babee36910, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
