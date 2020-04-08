@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Dragon : MonoBehaviour {
-    void Start () {
 
+    public ParticleSystem particle;
+  
+    void Start () {
+        particle.Stop();
     }
 
     void Update () {
@@ -17,8 +20,19 @@ public class Dragon : MonoBehaviour {
 
     private void OnTriggerStay (Collider other) {
 
-        if (Input.GetMouseButtonDown (0)) {
-            Debug.Log ("been pet");
+        if (Input.GetMouseButton (0)) {
+    
+
+            if(!particle.isPlaying)
+            {
+                particle.Play();
+            }
+                
+        }
+
+        if (particle.isPlaying)
+        {
+            particle.Stop();
         }
 
     }
