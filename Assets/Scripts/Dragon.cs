@@ -9,6 +9,7 @@ public class Dragon : MonoBehaviour {
     public Slider moodSlider;
 
     public float hungerDepletionSpeed = 15.0F;
+    public float hungerIncreaseAmount = 70.0F;
     public float moodDepletionSpeed = 15.0F;
     public float moodIncreaseSpeed = 50.0F;
 
@@ -45,6 +46,12 @@ public class Dragon : MonoBehaviour {
 
     private void OnTriggerEnter (Collider other) {
         Debug.Log ("enter");
+
+        if (other.tag == "Food") {
+            Destroy (other.gameObject);
+            hungerMeter += hungerIncreaseAmount;
+        }
+
     }
 
     private void OnTriggerStay (Collider other) {
