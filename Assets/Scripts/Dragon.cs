@@ -8,8 +8,11 @@ public class Dragon : MonoBehaviour {
     public Slider hungrySlider;
     public Slider moodSlider;
 
-    public float hungerDepletionSpeed = 5.0F;
-    public float moodDepletionSpeed = 5.0F;
+    public float hungerDepletionSpeed = 15.0F;
+    public float moodDepletionSpeed = 15.0F;
+    public float moodIncreaseSpeed = 50.0F;
+
+    private bool beingPet = false;
 
     public ParticleSystem particle;
 
@@ -32,13 +35,12 @@ public class Dragon : MonoBehaviour {
             hungerMeter -= (hungerDepletionSpeed * Time.deltaTime);
         }
 
-        if (moodMeter > 0) {
+        if (moodMeter > 0 && !beingPet) {
             moodMeter -= (moodDepletionSpeed * Time.deltaTime);
         }
 
         moodSlider.value = moodMeter;
         hungrySlider.value = hungerMeter;
-
     }
 
     private void OnTriggerEnter (Collider other) {
@@ -48,16 +50,20 @@ public class Dragon : MonoBehaviour {
     private void OnTriggerStay (Collider other) {
 
         if (Input.GetMouseButton (0)) {
-
             if (!particle.isPlaying) {
                 particle.Play ();
+                moodMeter += (moodIncreaseSpeed * Time.deltaTime);
+                beingPet = true;
             }
-
         }
 
         if (particle.isPlaying) {
             particle.Stop ();
         }
+    }
 
+    private void OnTriggerExit (Collider other) {
+        Debug.Log ("exit");
+        beingPet = false;
     }
 }
