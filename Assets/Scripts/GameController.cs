@@ -10,12 +10,14 @@ public class Rounds {
     [SerializeField]
     public List<Round> rounds;
 
-    [SerializeField]
-    public Vector2 DirectionToShoot;
 }
 
 [Serializable]
 public class Round {
+
+    [SerializeField]
+    public string roundName;
+
     [SerializeField]
     public List<GameObject> DragonsToSpawn;
 
@@ -36,10 +38,10 @@ public class GameController : MonoBehaviour {
     [HideInInspector]
     static public GameController Instance { get; private set; }
 
-    public Rounds rounds;
+    public Rounds round;
 
-    public GameObject[] spawnPoints;
-    public GameObject starPrefab;
+    private GameObject[] spawnPoints;
+
     private PoolManager _pool { get { return PoolManager.Instance; } }
 
     private void Awake () {
@@ -49,7 +51,7 @@ public class GameController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start () {
-        StartCoroutine (SpawnStarsWhileGameIsRunning (1.0f));
+        StartCoroutine (SpawnDragonsWhileGameIsRunning (1.0f));
     }
 
     // Update is called once per frame
@@ -57,31 +59,29 @@ public class GameController : MonoBehaviour {
 
     }
 
-    private IEnumerator SpawnStarsWhileGameIsRunning (float waitTime) {
+    private IEnumerator SpawnDragonsWhileGameIsRunning (float waitTime) {
 
         yield return new WaitForSeconds (2.0F);
-        // if (GameObject.FindGameObjectsWithTag ("Item").Length >= (Mathf.Clamp (PlayerManager.Instance.PlayerCount, 0, 4) + 3))
-        //     continue;
-        var star = SpawnStar ();
-        StartCoroutine (Release (star));
+
+        int counter = 1;
+        foreach (Round round in round.rounds) {
+
+            Debug.Log (counter + " - Spawning dragons - > " + round.roundName);
+
+            foreach (GameObject dragon in round.DragonsToSpawn) {
+                SpawnDragon (dragon);
+            }
+
+            yield return new WaitForSeconds (round.TimeToLast);
+        }
+
+        Debug.Log (" ** DONE SPAWNING DRAGONS **");
 
     }
 
-    private GameObject SpawnStar () {
-        SpawnPoint location = getRandomStarSpawnLocation ();
-        var star = _pool.spawnObject (starPrefab, location.SpawnHere, Quaternion.identity);
-        star.GetComponentInChildren<SpriteRenderer> ().enabled = true;
-        star.GetComponent<TrailRenderer> ().enabled = true;
-        star.GetComponent<ParticleSystem> ().Play ();
-
-        var forceVariance = new Vector2 (
-            location.DirectionToShoot.x + Random.Range (-1.0F, 1.0F),
-            location.DirectionToShoot.y + Random.Range (-1.0F, 1.0F)
-        );
-
-        star.GetComponent<Rigidbody2D> ().AddForce (forceVariance);
-        // star.GetComponent<Star> ().itemToSpawn = ReturnItem ();
-        return star;
+    private void SpawnDragon (GameObject dragonPrefab) {
+        SpawnPoint location = getRandomDragonSpawnLocation ();
+        var dragon = _pool.spawnObject (dragonPrefab, location.SpawnHere, Quaternion.identity);
     }
 
     private IEnumerator Release (GameObject star) {
@@ -96,9 +96,10 @@ public class GameController : MonoBehaviour {
         return new GameObject ();
     }
 
-    private SpawnPoint getRandomStarSpawnLocation () {
-        //GameObject go = this.spawnPoints.GetRandom ();
-        return getSpawnPoint (Vector3.zero);
+    private SpawnPoint getRandomDragonSpawnLocation () {
+
+        GameObject go = spawnPoints[Random.Range (0, spawnPoints.Length)];
+        return getSpawnPoint (go.transform.position);
     }
 
     SpawnPoint getSpawnPoint (Vector3 point) {
