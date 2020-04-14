@@ -5,11 +5,23 @@ using UnityEngine.UI;
 
 public class Dragon : MonoBehaviour {
 
+    public FoodType likedFood;
+    public FoodType dislikedFood;
+
+    public Image hotIcon;
+    public Image coldIcon;
+
+    public Image moodIcon;
+
+    public Button releaseButton;
+
     public Slider hungrySlider;
     public Slider patientTimer;
 
     public float hungerDepletionSpeed = 15.0F;
     public float hungerIncreaseAmount = 70.0F;
+
+    public float paienceIncreaseBonus = 15.0F;
     public float paienceDepletionSpeed = 15.0F;
     public float patienceIncreaseSpeed = 50.0F;
 
@@ -28,6 +40,10 @@ public class Dragon : MonoBehaviour {
 
         hungrySlider.maxValue = 100.0f;
         patientTimer.maxValue = 100.0f;
+
+        hotIcon.enabled = false;
+        coldIcon.enabled = false;
+        releaseButton.enabled = false;
     }
 
     void Update () {
@@ -49,7 +65,9 @@ public class Dragon : MonoBehaviour {
 
         if (other.tag == "Food") {
             Destroy (other.gameObject);
-            hungerMeter += hungerIncreaseAmount;
+
+            Feed (other.GetComponent<Food> ().type);
+
         }
 
     }
@@ -71,5 +89,31 @@ public class Dragon : MonoBehaviour {
     private void OnTriggerExit (Collider other) {
         Debug.Log ("exit");
         beingPet = false;
+    }
+
+    private void Feed (FoodType type) {
+
+        if (type == likedFood) {
+            feedDragonLikedFood ();
+        } else if (type == dislikedFood) {
+            feedDragonDislikedFood ();
+        } else {
+            feedDragon ();
+        }
+
+    }
+
+    private void feedDragonLikedFood () {
+        paitenceMeter += paienceIncreaseBonus;
+        hungerMeter += hungerIncreaseAmount;
+    }
+
+    private void feedDragon () {
+        hungerMeter += hungerIncreaseAmount;
+    }
+
+    private void feedDragonDislikedFood () {
+        paitenceMeter -= paienceIncreaseBonus;
+        hungerMeter += hungerIncreaseAmount;
     }
 }
