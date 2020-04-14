@@ -22,7 +22,7 @@ public class Round {
     public List<GameObject> DragonsToSpawn;
 
     [SerializeField]
-    public float TimeToLast;
+    public float TimeToLastInSeconds;
 }
 
 [Serializable]
@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour {
                 SpawnDragon (dragon);
             }
 
-            yield return new WaitForSeconds (round.TimeToLast);
+            yield return new WaitForSeconds (round.TimeToLastInSeconds);
         }
 
         Debug.Log (" ** DONE SPAWNING DRAGONS **");

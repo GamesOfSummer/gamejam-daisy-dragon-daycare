@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class Dragon : MonoBehaviour {
 
     public Slider hungrySlider;
-    public Slider moodSlider;
+    public Slider patientTimer;
 
     public float hungerDepletionSpeed = 15.0F;
     public float hungerIncreaseAmount = 70.0F;
-    public float moodDepletionSpeed = 15.0F;
-    public float moodIncreaseSpeed = 50.0F;
+    public float paienceDepletionSpeed = 15.0F;
+    public float patienceIncreaseSpeed = 50.0F;
 
     private bool beingPet = false;
 
@@ -21,13 +21,13 @@ public class Dragon : MonoBehaviour {
     public float hungerMeter = 100;
 
     [Range (0, 100)]
-    public float moodMeter = 100;
+    public float paitenceMeter = 0;
 
     void Start () {
         particle.Stop ();
 
         hungrySlider.maxValue = 100.0f;
-        moodSlider.maxValue = 100.0f;
+        patientTimer.maxValue = 100.0f;
     }
 
     void Update () {
@@ -36,11 +36,11 @@ public class Dragon : MonoBehaviour {
             hungerMeter -= (hungerDepletionSpeed * Time.deltaTime);
         }
 
-        if (moodMeter > 0 && !beingPet) {
-            moodMeter -= (moodDepletionSpeed * Time.deltaTime);
+        if (paitenceMeter < 100) {
+            paitenceMeter += (patienceIncreaseSpeed * Time.deltaTime);
         }
 
-        moodSlider.value = moodMeter;
+        patientTimer.value = paitenceMeter;
         hungrySlider.value = hungerMeter;
     }
 
@@ -59,7 +59,6 @@ public class Dragon : MonoBehaviour {
         if (Input.GetMouseButton (0)) {
             if (!particle.isPlaying) {
                 particle.Play ();
-                moodMeter += (moodIncreaseSpeed * Time.deltaTime);
                 beingPet = true;
             }
         }

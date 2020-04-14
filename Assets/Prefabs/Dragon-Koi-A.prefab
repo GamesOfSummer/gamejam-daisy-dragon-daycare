@@ -4812,7 +4812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.26415092, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5057,7 +5057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4433962, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.13698103, b: 0.6037736, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5083,7 +5083,7 @@ GameObject:
   - component: {fileID: 1090799779}
   - component: {fileID: 1090799780}
   m_Layer: 5
-  m_Name: Slider-Grumpy
+  m_Name: Slider-Patience
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5108,7 +5108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.42}
+  m_AnchoredPosition: {x: 0.061, y: 0.025000095}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090799780
@@ -5219,7 +5219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6603774, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5292,7 +5292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.025639204, b: 0.5943396, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5525,7 +5525,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.07, y: 0}
+  m_AnchoredPosition: {x: 0.07, y: -0.403}
   m_SizeDelta: {x: 160, y: 20.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1820974298
@@ -5726,7 +5726,7 @@ GameObject:
   - component: {fileID: 5456072983931232948}
   - component: {fileID: 5456072983931232954}
   m_Layer: 0
-  m_Name: Dragon
+  m_Name: Dragon-Koi-A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5871,10 +5871,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungrySlider: {fileID: 1820974298}
-  moodSlider: {fileID: 1090799780}
+  patientTimer: {fileID: 1090799780}
   hungerDepletionSpeed: 5
-  moodDepletionSpeed: 5
-  moodIncreaseSpeed: 15
+  hungerIncreaseAmount: 70
+  paienceDepletionSpeed: 15
+  patienceIncreaseSpeed: 5
   particle: {fileID: 194183903}
   hungerMeter: 100
-  moodMeter: 100
+  paitenceMeter: 0
