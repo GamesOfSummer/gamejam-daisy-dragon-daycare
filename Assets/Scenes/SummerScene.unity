@@ -374,15 +374,21 @@ MonoBehaviour:
       DragonsToSpawn:
       - {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a, type: 3}
       - {fileID: 6269631408664805780, guid: 802992bfdc5cf2141af09b6d852a6a6f, type: 3}
-      TimeToLast: 5
+      TimeToLast: 1
     - roundName: '** One Rabbit'
       DragonsToSpawn:
       - {fileID: 6269631408664805780, guid: 8c1332f9b96a06849bc985e1cfad6424, type: 3}
-      TimeToLast: 5
+      TimeToLast: 1
     - roundName: '** 1 Moth'
       DragonsToSpawn:
       - {fileID: 6269631408664805780, guid: ad93551baa2e6814c844efb0f0fbde8a, type: 3}
-      TimeToLast: 6
+      TimeToLast: 1
+    - roundName: '** 3 Moth'
+      DragonsToSpawn:
+      - {fileID: 6269631408664805780, guid: ad93551baa2e6814c844efb0f0fbde8a, type: 3}
+      - {fileID: 6269631408664805780, guid: ad93551baa2e6814c844efb0f0fbde8a, type: 3}
+      - {fileID: 6269631408664805780, guid: ad93551baa2e6814c844efb0f0fbde8a, type: 3}
+      TimeToLast: 1
 --- !u!4 &311342497
 Transform:
   m_ObjectHideFlags: 0

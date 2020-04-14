@@ -33,6 +33,14 @@ public class SpawnPoint {
     public Vector2 DirectionToShoot;
 }
 
+public class SpawnPointsTracker {
+    public SpawnPointsTracker (int ind) {
+        index = ind;
+    }
+    public int index;
+    public Boolean locked = false;
+}
+
 public class GameController : MonoBehaviour {
 
     [HideInInspector]
@@ -42,11 +50,18 @@ public class GameController : MonoBehaviour {
 
     private GameObject[] spawnPoints;
 
+    private SpawnPointsTracker[] spawnPointTrackers;
     private PoolManager _pool { get { return PoolManager.Instance; } }
 
     private void Awake () {
         Instance = this;
         spawnPoints = GameObject.FindGameObjectsWithTag ("Spawn Point");
+        spawnPointTrackers = new SpawnPointsTracker[spawnPoints.Length - 1];
+
+        for (int i = 0; i < spawnPointTrackers.Length; i++) {
+            spawnPointTrackers[i] = new SpawnPointsTracker (i);
+        }
+
     }
 
     // Start is called before the first frame update
@@ -98,13 +113,26 @@ public class GameController : MonoBehaviour {
 
     private SpawnPoint getRandomDragonSpawnLocation () {
 
-        GameObject go = spawnPoints[Random.Range (0, spawnPoints.Length)];
-        return getSpawnPoint (go.transform.position);
+        int breakCounter = 0;
+        Boolean placed = false;
+        while (!placed && breakCounter < 100) {
+
+            breakCounter++;
+
+            int index = Random.Range (0, spawnPoints.Length - 1);
+            if (!spawnPointTrackers[index].locked) {
+                GameObject go = spawnPoints[index];
+                spawnPointTrackers[index].locked = true;
+                return getSpawnPoint (go.transform.position);
+            }
+
+        }
+
+        Debug.LogError ("Not enough spawn points!");
+        return new SpawnPoint ();
     }
 
     SpawnPoint getSpawnPoint (Vector3 point) {
-        // GameObject planet;
-        // Vector2 direction = (planet.transform.position - point).normalized;
         return new SpawnPoint () { SpawnHere = point };
     }
 
