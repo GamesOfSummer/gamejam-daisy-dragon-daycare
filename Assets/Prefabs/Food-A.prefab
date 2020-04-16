@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 4197952399141807264}
   - component: {fileID: 4197952399141807267}
   - component: {fileID: 4197952399141807265}
+  - component: {fileID: 2217161002671273004}
   m_Layer: 0
-  m_Name: Food
+  m_Name: Food-A
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +59,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.89
+  m_Radius: 2.09
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4197952399141807265
 Rigidbody:
@@ -76,6 +77,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2217161002671273004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197952399141807276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee79294ce64544a4190b294ed835c822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &4197952399315256901
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 393bded453e8a5b438552b26bc98b587, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.34683514, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.009791374, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

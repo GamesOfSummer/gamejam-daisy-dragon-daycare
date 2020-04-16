@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     private Vector3 rotation;
     private Vector3 moveDirection = Vector3.zero;
 
+    private GameObject fruit;
+
     void Start () {
         _controller = GetComponent<CharacterController> ();
     }
@@ -27,5 +29,7 @@ public class PlayerController : MonoBehaviour {
         move = this.transform.TransformDirection (move);
         _controller.Move (move * _speed);
         this.transform.Rotate (this.rotation);
+
     }
+
 }
