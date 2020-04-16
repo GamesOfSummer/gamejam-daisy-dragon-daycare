@@ -35,6 +35,8 @@ public class Dragon : MonoBehaviour {
     [Range (0, 100)]
     public float paitenceMeter = 0;
 
+    private GameObject _player = null;
+
     void Start () {
         particle.Stop ();
 
@@ -61,20 +63,25 @@ public class Dragon : MonoBehaviour {
     }
 
     private void OnTriggerEnter (Collider other) {
-        Debug.Log ("enter");
 
         if (other.tag == "Food") {
+
+            Debug.Log ("FOOD!");
             Destroy (other.gameObject);
 
             Feed (other.GetComponent<Food> ().type);
-
         }
 
+        if (other.tag == "Player") {
+            Debug.Log ("PLAYER!");
+            _player = gameObject;
+
+        }
     }
 
     private void OnTriggerStay (Collider other) {
 
-        if (Input.GetMouseButton (0)) {
+        if (_player != null && Input.GetMouseButton (0)) {
             if (!particle.isPlaying) {
                 particle.Play ();
                 beingPet = true;
@@ -89,6 +96,7 @@ public class Dragon : MonoBehaviour {
     private void OnTriggerExit (Collider other) {
         Debug.Log ("exit");
         beingPet = false;
+        _player = null;
     }
 
     private void Feed (FoodType type) {

@@ -30,9 +30,9 @@ public class Food : MonoBehaviour {
         if (Input.GetMouseButton (1) || (Input.GetButton ("Fire1"))) {
 
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-            transform.position = ray.GetPoint (10);
+            transform.position = ray.GetPoint (1);
 
-            Debug.Log (ray + "-----" + transform.position);
+            //Debug.Log (ray + "-----" + transform.position);
         }
 
     }

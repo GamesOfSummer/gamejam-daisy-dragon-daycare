@@ -53,8 +53,13 @@ public class GameController : MonoBehaviour {
     private SpawnPointsTracker[] spawnPointTrackers;
     private PoolManager _pool { get { return PoolManager.Instance; } }
 
+    public GameObject redFruit;
+
+    private GameObject _player;
+
     private void Awake () {
         Instance = this;
+        _player = GameObject.FindGameObjectWithTag ("Player");
         spawnPoints = GameObject.FindGameObjectsWithTag ("Spawn Point");
         spawnPointTrackers = new SpawnPointsTracker[spawnPoints.Length - 1];
 
@@ -66,7 +71,7 @@ public class GameController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start () {
-        // StartCoroutine (SpawnDragonsWhileGameIsRunning (1.0f));
+        StartCoroutine (SpawnDragonsWhileGameIsRunning (1.0f));
     }
 
     // Update is called once per frame
@@ -134,6 +139,12 @@ public class GameController : MonoBehaviour {
 
     SpawnPoint getSpawnPoint (Vector3 point) {
         return new SpawnPoint () { SpawnHere = point };
+    }
+
+    public void ClickFoodButton () {
+
+        Debug.Log ("clicked");
+        var fruit = _pool.spawnObject (redFruit, _player.transform.position + new Vector3 (0, 0, 1.0F), Quaternion.identity);
     }
 
 }
