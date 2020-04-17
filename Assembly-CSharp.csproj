@@ -45,10 +45,13 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\MonsterLove\StateMachine\StateMachine.cs" />
+     <Compile Include="Assets\MonsterLove\StateMachine\StateMachineRunner.cs" />
      <Compile Include="Assets\Scripts\Dragon.cs" />
      <Compile Include="Assets\Scripts\FaceCamera.cs" />
      <Compile Include="Assets\Scripts\Food.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\GameState.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Pool\ObjectPool.cs" />
      <Compile Include="Assets\Scripts\Pool\ObjectPoolContainer.cs" />

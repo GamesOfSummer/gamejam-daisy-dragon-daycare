@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Dragon : MonoBehaviour {
 
+    public string dragonId;
+
     public FoodType likedFood;
     public FoodType dislikedFood;
 

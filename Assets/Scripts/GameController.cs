@@ -5,6 +5,8 @@ using PKG;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+using System.Runtime.InteropServices;
+
 [Serializable]
 public class Rounds {
     [SerializeField]
@@ -29,8 +31,6 @@ public class Round {
 public class SpawnPoint {
     [SerializeField]
     public Vector3 SpawnHere;
-    [SerializeField]
-    public Vector2 DirectionToShoot;
 }
 
 public class SpawnPointsTracker {
@@ -39,6 +39,10 @@ public class SpawnPointsTracker {
     }
     public int index;
     public Boolean locked = false;
+
+    public string dragonId;
+
+    public Vector3 SpawnHere;
 }
 
 public class GameController : MonoBehaviour {
@@ -65,11 +69,12 @@ public class GameController : MonoBehaviour {
 
         for (int i = 0; i < spawnPointTrackers.Length; i++) {
             spawnPointTrackers[i] = new SpawnPointsTracker (i);
+            spawnPointTrackers[i].SpawnHere = spawnPoints[i].transform.position;
+            spawnPointTrackers[i].dragonId = (Random.Range (0, 100) + Random.Range (0, 100) + Random.Range (0, 100)).ToString ();
         }
 
     }
 
-    // Start is called before the first frame update
     void Start () {
         StartCoroutine (SpawnDragonsWhileGameIsRunning (1.0f));
     }
@@ -100,17 +105,27 @@ public class GameController : MonoBehaviour {
     }
 
     private void SpawnDragon (GameObject dragonPrefab) {
-        SpawnPoint location = getRandomDragonSpawnLocation ();
+        SpawnPointsTracker location = getRandomDragonSpawnLocation ();
         var dragon = _pool.spawnObject (dragonPrefab, location.SpawnHere, Quaternion.identity);
+        dragon.GetComponent<Dragon> ().dragonId = location.dragonId;
     }
 
     public void ReleaseDragon () {
-        Debug.Log ("Clicked");
-
         var dragon = _player.GetComponent<PlayerController> ().GetCurrentDragon ();
 
         if (dragon != null) {
-            Debug.Log ("Released dragon");
+            Debug.Log ("Releasing dragon");
+
+            var id = dragon.GetComponent<Dragon> ().dragonId;
+
+            foreach (SpawnPointsTracker s in spawnPointTrackers) {
+                if (s.dragonId == id) {
+                    s.locked = false;
+                    Debug.Log ("SpawnPointsTracker point unlocked");
+                }
+            }
+
+            Debug.Log ("Releasing NOW");
             _pool.releaseObject (dragon);
         } else {
             Debug.Log ("No dragon to release");
@@ -118,19 +133,7 @@ public class GameController : MonoBehaviour {
 
     }
 
-    private IEnumerator Release (GameObject star) {
-        yield return new WaitForSeconds (4.0F);
-        _pool.releaseObject (star);
-    }
-
-    private GameObject ReturnItem () {
-        // var index = Random.Range (0, items.Count);
-        // index = index < 0 ? 0 : index;
-        // return items[index];
-        return new GameObject ();
-    }
-
-    private SpawnPoint getRandomDragonSpawnLocation () {
+    private SpawnPointsTracker getRandomDragonSpawnLocation () {
 
         int breakCounter = 0;
         Boolean placed = false;
@@ -138,17 +141,16 @@ public class GameController : MonoBehaviour {
 
             breakCounter++;
 
-            int index = Random.Range (0, spawnPoints.Length - 1);
+            int index = Random.Range (0, spawnPointTrackers.Length - 1);
             if (!spawnPointTrackers[index].locked) {
-                GameObject go = spawnPoints[index];
                 spawnPointTrackers[index].locked = true;
-                return getSpawnPoint (go.transform.position);
+                return spawnPointTrackers[index];
             }
 
         }
 
         Debug.LogError ("Not enough spawn points!");
-        return new SpawnPoint ();
+        return new SpawnPointsTracker (0);
     }
 
     SpawnPoint getSpawnPoint (Vector3 point) {
