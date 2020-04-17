@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 
     private GameObject fruit;
 
+    private GameObject _dragon;
+
     void Start () {
         _controller = GetComponent<CharacterController> ();
     }
@@ -30,6 +32,27 @@ public class PlayerController : MonoBehaviour {
         _controller.Move (move * _speed);
         this.transform.Rotate (this.rotation);
 
+    }
+
+    private void OnTriggerEnter (Collider other) {
+
+        if (other.tag == "Dragon") {
+            Debug.Log ("Dragon!");
+            _dragon = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit (Collider other) {
+
+        if (other.tag == "Dragon") {
+            Debug.Log ("EXIT Dragon!");
+            _dragon = null;
+        }
+
+    }
+
+    public GameObject GetCurrentDragon () {
+        return _dragon;
     }
 
 }

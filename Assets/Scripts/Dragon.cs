@@ -13,8 +13,6 @@ public class Dragon : MonoBehaviour {
 
     public Image moodIcon;
 
-    public Button releaseButton;
-
     public Slider hungrySlider;
     public Slider patientTimer;
 
@@ -45,7 +43,7 @@ public class Dragon : MonoBehaviour {
 
         hotIcon.enabled = false;
         coldIcon.enabled = false;
-        releaseButton.enabled = false;
+
     }
 
     void Update () {
@@ -65,17 +63,12 @@ public class Dragon : MonoBehaviour {
     private void OnTriggerEnter (Collider other) {
 
         if (other.tag == "Food") {
-
-            Debug.Log ("FOOD!");
             Destroy (other.gameObject);
-
             Feed (other.GetComponent<Food> ().type);
         }
 
         if (other.tag == "Player") {
-            Debug.Log ("PLAYER!");
             _player = gameObject;
-
         }
     }
 
@@ -97,6 +90,12 @@ public class Dragon : MonoBehaviour {
         Debug.Log ("exit");
         beingPet = false;
         _player = null;
+    }
+
+    public void ClickReleaseButton () {
+
+        Debug.Log ("clicked");
+        // GameController.Instance.ReleaseDragon (this.gameObject);
     }
 
     private void Feed (FoodType type) {

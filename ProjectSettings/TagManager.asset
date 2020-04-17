@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Food
   - Spawn Point
+  - Dragon
   layers:
   - Default
   - TransparentFX

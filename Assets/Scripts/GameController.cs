@@ -104,6 +104,20 @@ public class GameController : MonoBehaviour {
         var dragon = _pool.spawnObject (dragonPrefab, location.SpawnHere, Quaternion.identity);
     }
 
+    public void ReleaseDragon () {
+        Debug.Log ("Clicked");
+
+        var dragon = _player.GetComponent<PlayerController> ().GetCurrentDragon ();
+
+        if (dragon != null) {
+            Debug.Log ("Released dragon");
+            _pool.releaseObject (dragon);
+        } else {
+            Debug.Log ("No dragon to release");
+        }
+
+    }
+
     private IEnumerator Release (GameObject star) {
         yield return new WaitForSeconds (4.0F);
         _pool.releaseObject (star);
