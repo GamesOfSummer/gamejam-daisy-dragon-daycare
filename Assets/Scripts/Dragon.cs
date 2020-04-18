@@ -89,15 +89,8 @@ public class Dragon : MonoBehaviour {
     }
 
     private void OnTriggerExit (Collider other) {
-        Debug.Log ("exit");
         beingPet = false;
         _player = null;
-    }
-
-    public void ClickReleaseButton () {
-
-        Debug.Log ("clicked");
-        // GameController.Instance.ReleaseDragon (this.gameObject);
     }
 
     private void Feed (FoodType type) {

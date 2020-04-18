@@ -535,6 +535,7 @@ GameObject:
   m_Component:
   - component: {fileID: 311342497}
   - component: {fileID: 311342496}
+  - component: {fileID: 311342498}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -576,6 +577,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &311342498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311342495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfc775c2629b8448bcf4ec74cad1da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &491210900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,7 +1279,7 @@ PrefabInstance:
     - target: {fileID: 742161768381129195, guid: 431a685ee1726af48bda8511b82e288c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 742161768381129195, guid: 431a685ee1726af48bda8511b82e288c,
         type: 3}
@@ -1608,7 +1621,7 @@ PrefabInstance:
     - target: {fileID: 742161768381129195, guid: 431a685ee1726af48bda8511b82e288c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 742161768381129195, guid: 431a685ee1726af48bda8511b82e288c,
         type: 3}

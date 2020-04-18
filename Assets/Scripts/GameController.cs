@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using PKG;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
-using System.Runtime.InteropServices;
+using System.Linq;
 
 [Serializable]
 public class Rounds {
@@ -121,16 +120,27 @@ public class GameController : MonoBehaviour {
             foreach (SpawnPointsTracker s in spawnPointTrackers) {
                 if (s.dragonId == id) {
                     s.locked = false;
-                    Debug.Log ("SpawnPointsTracker point unlocked");
+                    //Debug.Log ("SpawnPointsTracker point unlocked");
                 }
             }
 
-            Debug.Log ("Releasing NOW");
             _pool.releaseObject (dragon);
+            _player.GetComponent<PlayerController> ().ReleaseDragon ();
+
+            Debug.Log ("isGameOver ()" + isGameOver ());
+
+            if (isGameOver ()) {
+                GameState.Instance.ChangeState_End ();
+            }
+
         } else {
             Debug.Log ("No dragon to release");
         }
 
+    }
+
+    private bool isGameOver () {
+        return !spawnPointTrackers.Where (x => x.locked == true).Any ();
     }
 
     private SpawnPointsTracker getRandomDragonSpawnLocation () {

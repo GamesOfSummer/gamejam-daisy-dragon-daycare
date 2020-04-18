@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter (Collider other) {
 
         if (other.tag == "Dragon") {
-            Debug.Log ("Dragon!");
             _dragon = other.gameObject;
         }
     }
@@ -45,7 +44,6 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerExit (Collider other) {
 
         if (other.tag == "Dragon") {
-            Debug.Log ("EXIT Dragon!");
             _dragon = null;
         }
 
@@ -53,6 +51,10 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject GetCurrentDragon () {
         return _dragon;
+    }
+
+    public void ReleaseDragon () {
+        _dragon = null;
     }
 
 }
