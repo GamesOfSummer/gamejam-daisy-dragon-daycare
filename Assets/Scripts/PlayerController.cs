@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour {
 
         if (other.tag == "Dragon") {
             _dragon = other.gameObject;
+
+            if (_dragon.GetComponent<Dragon> ().canBeReleased ()) {
+                GameController.Instance.TurnOnReleaseButton ();
+            }
         }
     }
 

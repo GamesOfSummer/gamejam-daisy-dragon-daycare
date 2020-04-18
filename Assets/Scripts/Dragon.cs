@@ -93,6 +93,10 @@ public class Dragon : MonoBehaviour {
         _player = null;
     }
 
+    public bool canBeReleased () {
+        return paitenceMeter > 99.0;
+    }
+
     private void Feed (FoodType type) {
 
         if (type == likedFood) {

@@ -60,6 +60,8 @@ public class GameController : MonoBehaviour {
 
     private GameObject _player;
 
+    private GameObject releaseDragonButton;
+
     private void Awake () {
 
         Instance = this;
@@ -76,12 +78,24 @@ public class GameController : MonoBehaviour {
     }
 
     void Start () {
+
+        releaseDragonButton = GameObject.FindGameObjectWithTag ("ReleaseDragonButton");
+        releaseDragonButton.SetActive (false);
+
         StartCoroutine (SpawnDragonsWhileGameIsRunning (1.0f));
     }
 
     // Update is called once per frame
     void Update () {
 
+    }
+
+    public void TurnOnReleaseButton () {
+        releaseDragonButton.SetActive (true);
+    }
+
+    public void TurnOffReleaseButton () {
+        releaseDragonButton.SetActive (false);
     }
 
     private IEnumerator SpawnDragonsWhileGameIsRunning (float waitTime) {
@@ -127,6 +141,7 @@ public class GameController : MonoBehaviour {
 
             _pool.releaseObject (dragon);
             _player.GetComponent<PlayerController> ().ReleaseDragon ();
+            TurnOffReleaseButton ();
 
             Debug.Log ("isGameOver ()" + isGameOver ());
 
