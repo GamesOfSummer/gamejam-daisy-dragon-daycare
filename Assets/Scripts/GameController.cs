@@ -61,6 +61,7 @@ public class GameController : MonoBehaviour {
     private GameObject _player;
 
     private void Awake () {
+
         Instance = this;
         _player = GameObject.FindGameObjectWithTag ("Player");
         spawnPoints = GameObject.FindGameObjectsWithTag ("Spawn Point");

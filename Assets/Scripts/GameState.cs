@@ -17,24 +17,25 @@ public class GameState : MonoBehaviour {
 
     StateMachine<States> fsm;
 
-    // Start is called before the first frame update
-    void Start () {
+    void Awake () {
         Instance = this;
         fsm = StateMachine<States>.Initialize (this);
         fsm.ChangeState (States.Play);
-
-    }
-
-    // Update is called once per frame
-    void Update () {
-
     }
 
     public void ChangeState_End () {
         fsm.ChangeState (States.End);
     }
 
-    void Init_End () {
+    void Play_Enter () {
+        Debug.Log ("Entering play state - We are now ready");
+    }
+
+    void Play_Update () {
+        //Debug.Log ("Update INIT state - We are now ready");
+    }
+
+    void End_Enter () {
         Debug.Log ("Enterinlg End state - We are now ready");
     }
 }
