@@ -105,21 +105,25 @@ public class Dragon : MonoBehaviour {
 
         while (true) {
             yield return new WaitForSeconds (2.0F);
-            float mood = CalculateMood () * internalMoodSetting;
+            CalculateMoodSummaryInstantly ();
+        }
+    }
 
-            Debug.Log (mood);
+    private void CalculateMoodSummaryInstantly () {
+        float mood = CalculateMood () * internalMoodSetting;
 
-            happyIcon.enabled = false;
-            neutralIcon.enabled = false;
-            sadIcon.enabled = false;
+        Debug.Log (mood);
 
-            if (mood < .3F) {
-                sadIcon.enabled = true;
-            } else if (mood >.9F) {
-                happyIcon.enabled = true;
-            } else {
-                neutralIcon.enabled = true;
-            }
+        happyIcon.enabled = false;
+        neutralIcon.enabled = false;
+        sadIcon.enabled = false;
+
+        if (mood < .3F) {
+            sadIcon.enabled = true;
+        } else if (mood >.9F) {
+            happyIcon.enabled = true;
+        } else {
+            neutralIcon.enabled = true;
         }
     }
 
@@ -152,14 +156,17 @@ public class Dragon : MonoBehaviour {
     private void feedDragonLikedFood () {
         paitenceMeter += paienceIncreaseBonus;
         hungerMeter += hungerIncreaseAmount;
+        internalMoodSetting = 2.0F;
     }
 
     private void feedDragon () {
         hungerMeter += hungerIncreaseAmount;
+        internalMoodSetting = 1.0F;
     }
 
     private void feedDragonDislikedFood () {
         paitenceMeter -= paienceIncreaseBonus;
         hungerMeter += hungerIncreaseAmount;
+        internalMoodSetting = 0.5F;
     }
 }

@@ -57,6 +57,8 @@ public class GameController : MonoBehaviour {
     private PoolManager _pool { get { return PoolManager.Instance; } }
 
     public GameObject redFruit;
+    public GameObject blueFruit;
+    public GameObject yellowFruit;
 
     private GameObject _player;
 
@@ -183,10 +185,26 @@ public class GameController : MonoBehaviour {
         return new SpawnPoint () { SpawnHere = point };
     }
 
-    public void ClickFoodButton () {
+    public void ClickRedFoodButton () {
 
         Debug.Log ("clicked");
-        var fruit = _pool.spawnObject (redFruit, _player.transform.position + new Vector3 (0, 0, 1.0F), Quaternion.identity);
+        spawnFruit (redFruit);
+    }
+
+    public void ClickBlueFoodButton () {
+
+        Debug.Log ("clicked");
+        spawnFruit (blueFruit);
+    }
+
+    public void ClickYellowFoodButton () {
+
+        Debug.Log ("clicked");
+        spawnFruit (yellowFruit);
+    }
+
+    private void spawnFruit (GameObject prefab) {
+        var fruit = _pool.spawnObject (prefab, _player.transform.position + new Vector3 (0, 0, 1.0F), Quaternion.identity);
     }
 
 }
