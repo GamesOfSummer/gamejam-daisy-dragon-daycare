@@ -13,7 +13,9 @@ public class Dragon : MonoBehaviour {
     public Image hotIcon;
     public Image coldIcon;
 
-    public Image moodIcon;
+    public Image happyIcon;
+    public Image neutralIcon;
+    public Image sadIcon;
 
     public Slider hungrySlider;
     public Slider patientTimer;
@@ -29,23 +31,29 @@ public class Dragon : MonoBehaviour {
 
     public ParticleSystem particle;
 
-    [Range (0, 100)]
-    public float hungerMeter = 100;
+    [Range (0, 1)]
+    public float hungerMeter = 1.0F;
 
-    [Range (0, 100)]
+    [Range (0, 1)]
     public float paitenceMeter = 0;
+
+    private float internalMoodSetting = 1.0F;
 
     private GameObject _player = null;
 
     void Start () {
         particle.Stop ();
 
-        hungrySlider.maxValue = 100.0f;
-        patientTimer.maxValue = 100.0f;
+        hungrySlider.maxValue = 1.0f;
+        patientTimer.maxValue = 1.0f;
 
         hotIcon.enabled = false;
         coldIcon.enabled = false;
 
+        happyIcon.enabled = false;
+        neutralIcon.enabled = true;
+        sadIcon.enabled = false;
+        StartCoroutine (CalculateMoodSummary ());
     }
 
     void Update () {
@@ -54,8 +62,8 @@ public class Dragon : MonoBehaviour {
             hungerMeter -= (hungerDepletionSpeed * Time.deltaTime);
         }
 
-        if (paitenceMeter < 100) {
-            paitenceMeter += (patienceIncreaseSpeed * Time.deltaTime);
+        if (paitenceMeter < 1) {
+            paitenceMeter += (patienceIncreaseSpeed * CalculateMood () * internalMoodSetting * Time.deltaTime);
         }
 
         patientTimer.value = paitenceMeter;
@@ -93,8 +101,40 @@ public class Dragon : MonoBehaviour {
         _player = null;
     }
 
+    private IEnumerator CalculateMoodSummary () {
+
+        while (true) {
+            yield return new WaitForSeconds (2.0F);
+            float mood = CalculateMood () * internalMoodSetting;
+
+            Debug.Log (mood);
+
+            happyIcon.enabled = false;
+            neutralIcon.enabled = false;
+            sadIcon.enabled = false;
+
+            if (mood < .3F) {
+                sadIcon.enabled = true;
+            } else if (mood >.9F) {
+                happyIcon.enabled = true;
+            } else {
+                neutralIcon.enabled = true;
+            }
+        }
+    }
+
+    private float CalculateMood () {
+        if (hungerMeter < .5F) {
+            return 0;
+        } else if (hungerMeter < .9F) {
+            return 0.7F;
+        }
+
+        return 1;
+    }
+
     public bool canBeReleased () {
-        return paitenceMeter > 99.0;
+        return paitenceMeter >.95F;
     }
 
     private void Feed (FoodType type) {
