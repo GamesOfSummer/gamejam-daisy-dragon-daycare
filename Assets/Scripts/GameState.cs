@@ -20,6 +20,22 @@ public class GameState : MonoBehaviour {
     void Awake () {
         Instance = this;
         fsm = StateMachine<States>.Initialize (this);
+        fsm.ChangeState (States.TitleScreen);
+    }
+
+    public bool IsCurrentStateTitle () {
+        return fsm.State == States.TitleScreen;
+    }
+
+    public bool IsCurrentStatePlay () {
+        return fsm.State == States.Play;
+    }
+
+    public bool IsCurrentStateEnd () {
+        return fsm.State == States.End;
+    }
+
+    public void ChangeState_Play () {
         fsm.ChangeState (States.Play);
     }
 

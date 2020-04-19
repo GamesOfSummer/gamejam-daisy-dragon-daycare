@@ -54,6 +54,12 @@ public class GameController : MonoBehaviour {
     private GameObject[] spawnPoints;
 
     private SpawnPointsTracker[] spawnPointTrackers;
+
+    public GameObject titleScreenUI;
+    public GameObject gameScreenUI;
+
+    public GameObject endScreenUI;
+
     private PoolManager _pool { get { return PoolManager.Instance; } }
 
     public GameObject redFruit;
@@ -67,6 +73,11 @@ public class GameController : MonoBehaviour {
     private void Awake () {
 
         Instance = this;
+
+        releaseDragonButton = GameObject.FindGameObjectWithTag ("ReleaseDragonButton");
+        gameScreenUI.SetActive (false);
+        endScreenUI.SetActive (false);
+
         _player = GameObject.FindGameObjectWithTag ("Player");
         spawnPoints = GameObject.FindGameObjectsWithTag ("Spawn Point");
         spawnPointTrackers = new SpawnPointsTracker[spawnPoints.Length - 1];
@@ -79,17 +90,14 @@ public class GameController : MonoBehaviour {
 
     }
 
-    void Start () {
-
-        releaseDragonButton = GameObject.FindGameObjectWithTag ("ReleaseDragonButton");
-        releaseDragonButton.SetActive (false);
-
-        StartCoroutine (SpawnDragonsWhileGameIsRunning (1.0f));
-    }
-
     // Update is called once per frame
     void Update () {
 
+        if (GameState.Instance.IsCurrentStateTitle () && Input.GetMouseButton (0)) {
+            GameState.Instance.ChangeState_Play ();
+            ToggleGameplayUI ();
+            StartCoroutine (SpawnDragonsWhileGameIsRunning (1.0f));
+        }
     }
 
     public void TurnOnReleaseButton () {
@@ -149,6 +157,7 @@ public class GameController : MonoBehaviour {
 
             if (isGameOver ()) {
                 GameState.Instance.ChangeState_End ();
+                ToggleEndUI ();
             }
 
         } else {
@@ -205,6 +214,17 @@ public class GameController : MonoBehaviour {
 
     private void spawnFruit (GameObject prefab) {
         var fruit = _pool.spawnObject (prefab, _player.transform.position + new Vector3 (0, 0, 1.0F), Quaternion.identity);
+    }
+
+    public void ToggleGameplayUI () {
+        titleScreenUI.SetActive (false);
+        gameScreenUI.SetActive (true);
+    }
+
+    public void ToggleEndUI () {
+        titleScreenUI.SetActive (false);
+        gameScreenUI.SetActive (false);
+        endScreenUI.SetActive (true);
     }
 
 }
