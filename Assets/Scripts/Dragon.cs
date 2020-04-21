@@ -5,7 +5,21 @@ using UnityEngine.UI;
 
 public class Dragon : MonoBehaviour {
 
+    [Header ("Settings - please tweak")]
+    public float hungerDepletionSpeed = 15.0F;
+    public float hungerIncreaseAmount = 70.0F;
+
+    public float paienceIncreaseBonus = 15.0F;
+    public float paienceDepletionSpeed = 15.0F;
+    public float patienceIncreaseSpeed = 50.0F;
+
+    [HideInInspector]
     public string dragonId;
+
+    [Header ("DO NOT TOUCH BELOW THIS LINE")]
+    public GameObject poop;
+
+    public GameObject prefferedPettingSpot;
 
     public FoodType likedFood;
     public FoodType dislikedFood;
@@ -20,19 +34,12 @@ public class Dragon : MonoBehaviour {
     public Slider hungrySlider;
     public Slider patientTimer;
 
-    public float hungerDepletionSpeed = 15.0F;
-    public float hungerIncreaseAmount = 70.0F;
-
-    public float paienceIncreaseBonus = 15.0F;
-    public float paienceDepletionSpeed = 15.0F;
-    public float patienceIncreaseSpeed = 50.0F;
-
     private bool beingPet = false;
 
     public ParticleSystem particle;
 
     [Range (0, 1)]
-    public float hungerMeter = 1.0F;
+    public float hungerMeter = 0.5F;
 
     [Range (0, 1)]
     public float paitenceMeter = 0;
@@ -45,6 +52,7 @@ public class Dragon : MonoBehaviour {
         particle.Stop ();
 
         hungrySlider.maxValue = 1.0f;
+        hungerMeter = 0.5F;
         patientTimer.maxValue = 1.0f;
 
         hotIcon.enabled = false;
@@ -89,6 +97,13 @@ public class Dragon : MonoBehaviour {
                 particle.Play ();
                 beingPet = true;
             }
+
+            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+            var holder = ray.GetPoint (1);
+            Debug.Log (holder);
+
+            Debug.Log (Vector3.Distance (prefferedPettingSpot.transform.position, holder));
+
         }
 
         if (particle.isPlaying) {
@@ -106,13 +121,28 @@ public class Dragon : MonoBehaviour {
         while (true) {
             yield return new WaitForSeconds (2.0F);
             CalculateMoodSummaryInstantly ();
+            Poop ();
         }
+    }
+
+    bool hasPooped = false;
+    private void Poop () {
+
+        if (hungerMeter >.7F && !hasPooped) {
+            hasPooped = true;
+
+            var poopObj = GameController.Instance.SpawnObject (poop);
+            var pos = transform.position;
+            poopObj.transform.position = new Vector3 (pos.x, pos.y, pos.z);
+
+        }
+
     }
 
     private void CalculateMoodSummaryInstantly () {
         float mood = CalculateMood () * internalMoodSetting;
 
-        Debug.Log (mood);
+        //Debug.Log (mood);
 
         happyIcon.enabled = false;
         neutralIcon.enabled = false;

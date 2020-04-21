@@ -227,4 +227,12 @@ public class GameController : MonoBehaviour {
         endScreenUI.SetActive (true);
     }
 
+    public GameObject SpawnObject (GameObject obj) {
+        return _pool.spawnObject (obj, new Vector3 (0, 0, 0), Quaternion.identity);
+    }
+
+    public void ReleaseObject (GameObject obj) {
+        _pool.releaseObject (obj);
+    }
+
 }
