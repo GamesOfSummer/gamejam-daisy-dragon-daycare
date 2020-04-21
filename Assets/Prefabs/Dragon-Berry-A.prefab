@@ -6272,6 +6272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragonId: 
+  poop: {fileID: 6469355263136289459, guid: 483a3ffe983c3ad4db2aad6f023505fe, type: 3}
+  prefferedPettingSpot: {fileID: 4713056677954785647}
   likedFood: 0
   dislikedFood: 1
   hotIcon: {fileID: 2310430939112421274}
