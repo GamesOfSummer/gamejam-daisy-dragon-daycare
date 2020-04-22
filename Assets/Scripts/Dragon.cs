@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum StatusAilment {
+    None,
+    Hot,
+    Cold,
+    Sick
+}
+
 public class Dragon : MonoBehaviour {
 
-    [Header ("Settings - please tweak")]
+    [Header ("Settings - please tweak!")]
     public float hungerDepletionSpeed = 15.0F;
     public float hungerIncreaseAmount = 70.0F;
 
     public float paienceIncreaseBonus = 15.0F;
     public float paienceDepletionSpeed = 15.0F;
     public float patienceIncreaseSpeed = 50.0F;
+
+    [Header ("Range => 1 - 100")]
+    public float chanceToGetAStatusAilment = 5.0F;
 
     [HideInInspector]
     public string dragonId;
@@ -26,6 +36,8 @@ public class Dragon : MonoBehaviour {
 
     public Image hotIcon;
     public Image coldIcon;
+
+    public Image sickIcon;
 
     public Image happyIcon;
     public Image neutralIcon;
@@ -48,6 +60,8 @@ public class Dragon : MonoBehaviour {
 
     private GameObject _player = null;
 
+    private StatusAilment status = StatusAilment.None;
+
     void Start () {
         particle.Stop ();
 
@@ -61,7 +75,7 @@ public class Dragon : MonoBehaviour {
         happyIcon.enabled = false;
         neutralIcon.enabled = true;
         sadIcon.enabled = false;
-        StartCoroutine (CalculateMoodSummary ());
+        StartCoroutine (ProcessEmotions ());
     }
 
     void Update () {
@@ -116,16 +130,43 @@ public class Dragon : MonoBehaviour {
         _player = null;
     }
 
-    private IEnumerator CalculateMoodSummary () {
+    private IEnumerator ProcessEmotions () {
 
         while (true) {
             yield return new WaitForSeconds (2.0F);
             CalculateMoodSummaryInstantly ();
             Poop ();
+            AddStatusAilment ();
         }
     }
 
+    bool hasGottenAStatusAilment = false;
+    private void AddStatusAilment () {
+
+        if (!hasGottenAStatusAilment && paitenceMeter >.5F && paitenceMeter < .9F) {
+
+            if (Random.Range (0, 101) < chanceToGetAStatusAilment) {
+                hasGottenAStatusAilment = true;
+                Debug.Log ("SICK");
+                internalMoodSetting = 0;
+
+                if (Random.Range (1, 3) < 2) {
+                    status = StatusAilment.Hot;
+                    hotIcon.enabled = true;
+
+                } else {
+                    status = StatusAilment.Cold;
+                    coldIcon.enabled = true;
+                }
+
+            }
+
+        }
+
+    }
+
     bool hasPooped = false;
+    bool cleanedUpPoop = false;
     private void Poop () {
 
         if (hungerMeter >.7F && !hasPooped) {
@@ -158,7 +199,7 @@ public class Dragon : MonoBehaviour {
     }
 
     private float CalculateMood () {
-        if (hungerMeter < .5F) {
+        if (hungerMeter < .3F) {
             return 0;
         } else if (hungerMeter < .9F) {
             return 0.7F;

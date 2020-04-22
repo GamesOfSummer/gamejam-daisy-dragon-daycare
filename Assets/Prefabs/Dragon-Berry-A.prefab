@@ -5764,12 +5764,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 393bded453e8a5b438552b26bc98b587, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f7a1790483b3d14d9b66541538cf868, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5806,7 +5806,7 @@ Transform:
   m_GameObject: {fileID: 3237510191270970077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 5568636025664074387}
   m_RootOrder: 0
@@ -5932,12 +5932,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.39954376, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 393bded453e8a5b438552b26bc98b587, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 132b6d97b50da0d4693c9a8ca2cfcb86, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6289,7 +6289,8 @@ MonoBehaviour:
   hungerIncreaseAmount: 7
   paienceIncreaseBonus: 0.02
   paienceDepletionSpeed: 0.5
-  patienceIncreaseSpeed: 1
+  patienceIncreaseSpeed: 0.5
+  chanceToGetAStatusAilment: 50
   dragonId: 
   poop: {fileID: 6469355263136289459, guid: 483a3ffe983c3ad4db2aad6f023505fe, type: 3}
   prefferedPettingSpot: {fileID: 4713056677954785647}
@@ -6297,6 +6298,7 @@ MonoBehaviour:
   dislikedFood: 1
   hotIcon: {fileID: 2310430939112421274}
   coldIcon: {fileID: 8282802524573210060}
+  sickIcon: {fileID: 0}
   happyIcon: {fileID: 4861422487730767670}
   neutralIcon: {fileID: 3683979642007731452}
   sadIcon: {fileID: 5689325598594632876}

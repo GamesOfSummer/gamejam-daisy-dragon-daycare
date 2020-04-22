@@ -2565,6 +2565,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
         type: 3}
+      propertyPath: round.rounds.Array.data[0].DragonsToSpawn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.data[1].DragonsToSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.data[2].DragonsToSpawn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
       propertyPath: titleScreenUI
       value: 
       objectReference: {fileID: 1218289256}
@@ -2578,6 +2598,46 @@ PrefabInstance:
       propertyPath: endScreenUI
       value: 
       objectReference: {fileID: 2122245411}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.data[0].DragonsToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a,
+        type: 3}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.data[1].roundName
+      value: '** 1 Koi'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.data[1].DragonsToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a,
+        type: 3}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.data[1].DragonsToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a,
+        type: 3}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.data[2].roundName
+      value: '** 2 Koi'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.data[2].DragonsToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a,
+        type: 3}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: round.rounds.Array.data[2].DragonsToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a,
+        type: 3}
     - target: {fileID: 2087433504557567214, guid: d9180285f0bcbb14cb9905c96f4c77a3,
         type: 3}
       propertyPath: m_Name
