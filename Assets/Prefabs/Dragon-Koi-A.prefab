@@ -5850,7 +5850,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8106ce424bb6a9941bbfbb60743115da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7399daa0fedf1ce45a77bc769d5f1e4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6140,7 +6140,7 @@ GameObject:
   - component: {fileID: 5456072983931232948}
   - component: {fileID: 5456072983931232954}
   m_Layer: 0
-  m_Name: Dragon-Berry-A
+  m_Name: Dragon-Koi-A
   m_TagString: Dragon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6285,12 +6285,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67536077637b2c14e94aca55f81458f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerDepletionSpeed: 0.02
+  hungerDepletionSpeed: 0.03
   hungerIncreaseAmount: 7
-  paienceIncreaseBonus: 0.02
+  paienceIncreaseBonus: 0.3
   paienceDepletionSpeed: 0.5
-  patienceIncreaseSpeed: 0.5
-  chanceToGetAStatusAilment: 0
+  patienceIncreaseSpeed: 0.3
+  chanceToGetAStatusAilment: 50
   dragonId: 
   poop: {fileID: 6469355263136289459, guid: 483a3ffe983c3ad4db2aad6f023505fe, type: 3}
   prefferedPettingSpot: {fileID: 4713056677954785647}
