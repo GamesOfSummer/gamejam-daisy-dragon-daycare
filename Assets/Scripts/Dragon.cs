@@ -114,9 +114,9 @@ public class Dragon : MonoBehaviour {
 
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             var holder = ray.GetPoint (1);
-            Debug.Log (holder);
+            // Debug.Log (holder);
 
-            Debug.Log (Vector3.Distance (prefferedPettingSpot.transform.position, holder));
+            // Debug.Log (Vector3.Distance (prefferedPettingSpot.transform.position, holder));
 
         }
 

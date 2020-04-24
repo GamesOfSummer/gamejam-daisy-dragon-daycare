@@ -782,17 +782,96 @@ PrefabInstance:
     - target: {fileID: 7525346664390180882, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 203
+      value: -647.7
       objectReference: {fileID: 0}
     - target: {fileID: 7525346664390180882, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 51
+      value: 69.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180882, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 69.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180882, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180882, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180882, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 149.4
       objectReference: {fileID: 0}
     - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_margin.y
-      value: -0.9768944
+      value: 13.586596
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_text
+      value: 'Made By :
+
+        Hope "Kayden" Nasr : 3d
+
+        Sarah Besserer
+        : 2d art, UI
+
+        Kevin Gravis : Audio
+
+        Summer Tomaseki : Programming'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 9.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 9.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 1.9375757
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390180883, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 513
       objectReference: {fileID: 0}
     - target: {fileID: 7525346664890213492, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
@@ -807,18 +886,43 @@ PrefabInstance:
     - target: {fileID: 7525346665167643748, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 59.899994
+      value: 103.5
       objectReference: {fileID: 0}
     - target: {fileID: 7525346665167643748, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -40.30002
+      value: -54.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346665167643748, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 207
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346665167643748, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 108.5
       objectReference: {fileID: 0}
     - target: {fileID: 7525346665167643749, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1176794426}
+    - target: {fileID: 7525346665167643749, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.9433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346665167643749, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.64421755
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346665167643749, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.35154858
+      objectReference: {fileID: 0}
     - target: {fileID: 7525346665183331540, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -968,6 +1072,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas-UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346665394295180, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7525346665394295181, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
@@ -1902,6 +2011,72 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320157439}
   m_Mesh: {fileID: -1947546241216008824, guid: eda6d873e8ba139419bc09d087d1aa34, type: 3}
+--- !u!1 &1341997564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1341997567}
+  - component: {fileID: 1341997566}
+  - component: {fileID: 1341997565}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1341997565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341997564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1341997566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341997564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1341997567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341997564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1461118325
 PrefabInstance:
   m_ObjectHideFlags: 0

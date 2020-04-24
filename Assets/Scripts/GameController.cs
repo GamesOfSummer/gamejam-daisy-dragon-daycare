@@ -21,9 +21,6 @@ public class Round {
 
     [SerializeField]
     public List<GameObject> DragonsToSpawn;
-
-    [SerializeField]
-    public float TimeToLastInSeconds;
 }
 
 [Serializable]
@@ -69,6 +66,7 @@ public class GameController : MonoBehaviour {
     private GameObject _player;
 
     private GameObject releaseDragonButton;
+    private bool allDragonsSpawned = false;
 
     private void Awake () {
 
@@ -111,21 +109,21 @@ public class GameController : MonoBehaviour {
     private IEnumerator SpawnDragonsWhileGameIsRunning (float waitTime) {
 
         yield return new WaitForSeconds (2.0F);
-
         int counter = 1;
         foreach (Round round in round.rounds) {
-
             Debug.Log (counter + " - Spawning dragons - > " + round.roundName);
+
+            while (GameObject.FindGameObjectsWithTag ("Dragon").Length != 0) {
+                yield return new WaitForSeconds (2.0F);
+            }
 
             foreach (GameObject dragon in round.DragonsToSpawn) {
                 SpawnDragon (dragon);
             }
-
-            yield return new WaitForSeconds (round.TimeToLastInSeconds);
         }
 
+        allDragonsSpawned = true;
         Debug.Log (" ** DONE SPAWNING DRAGONS **");
-
     }
 
     private void SpawnDragon (GameObject dragonPrefab) {
@@ -153,7 +151,7 @@ public class GameController : MonoBehaviour {
             _player.GetComponent<PlayerController> ().ReleaseDragon ();
             TurnOffReleaseButton ();
 
-            Debug.Log ("isGameOver ()" + isGameOver ());
+            //Debug.Log ("isGameOver ()" + isGameOver ());
 
             if (isGameOver ()) {
                 GameState.Instance.ChangeState_End ();
@@ -167,7 +165,7 @@ public class GameController : MonoBehaviour {
     }
 
     private bool isGameOver () {
-        return !spawnPointTrackers.Where (x => x.locked == true).Any ();
+        return allDragonsSpawned && !spawnPointTrackers.Where (x => x.locked == true).Any ();
     }
 
     private SpawnPointsTracker getRandomDragonSpawnLocation () {
@@ -219,6 +217,7 @@ public class GameController : MonoBehaviour {
     public void ToggleGameplayUI () {
         titleScreenUI.SetActive (false);
         gameScreenUI.SetActive (true);
+        releaseDragonButton.SetActive (false);
     }
 
     public void ToggleEndUI () {
