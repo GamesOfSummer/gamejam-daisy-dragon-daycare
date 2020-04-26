@@ -747,6 +747,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7525346664190450997, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7525346664190450998, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_AnchoredPosition.x

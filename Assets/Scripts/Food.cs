@@ -5,7 +5,9 @@ using UnityEngine;
 public enum FoodType {
     RedFruit,
     YellowFruit,
-    BlueFruit
+    BlueFruit,
+
+    None,
 }
 
 public class Food : MonoBehaviour {

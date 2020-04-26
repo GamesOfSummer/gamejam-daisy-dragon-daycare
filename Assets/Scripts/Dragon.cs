@@ -40,7 +40,6 @@ public class Dragon : MonoBehaviour {
     public Image sickIcon;
 
     public Image happyIcon;
-    public Image neutralIcon;
     public Image sadIcon;
 
     public Slider hungrySlider;
@@ -66,14 +65,13 @@ public class Dragon : MonoBehaviour {
         particle.Stop ();
 
         hungrySlider.maxValue = 1.0f;
-        hungerMeter = 0.5F;
+        hungerMeter = 0.7F;
         patientTimer.maxValue = 1.0f;
 
         hotIcon.enabled = false;
         coldIcon.enabled = false;
 
         happyIcon.enabled = false;
-        neutralIcon.enabled = true;
         sadIcon.enabled = false;
         StartCoroutine (ProcessEmotions ());
     }
@@ -186,15 +184,12 @@ public class Dragon : MonoBehaviour {
         //Debug.Log (mood);
 
         happyIcon.enabled = false;
-        neutralIcon.enabled = false;
         sadIcon.enabled = false;
 
-        if (mood < .3F) {
+        if (mood < .2F) {
             sadIcon.enabled = true;
-        } else if (mood >.9F) {
+        } else if (mood >.7F) {
             happyIcon.enabled = true;
-        } else {
-            neutralIcon.enabled = true;
         }
     }
 
