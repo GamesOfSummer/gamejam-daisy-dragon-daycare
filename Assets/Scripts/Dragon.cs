@@ -61,6 +61,8 @@ public class Dragon : MonoBehaviour {
 
     private StatusAilment status = StatusAilment.None;
 
+    private bool canRelease = false;
+
     void Start () {
         particle.Stop ();
 
@@ -78,16 +80,20 @@ public class Dragon : MonoBehaviour {
 
     void Update () {
 
-        if (hungerMeter > 0) {
-            hungerMeter -= (hungerDepletionSpeed * Time.deltaTime);
-        }
+        if (!canBeReleased ()) {
+            if (hungerMeter > 0) {
+                hungerMeter -= (hungerDepletionSpeed * Time.deltaTime);
+            }
 
-        if (paitenceMeter < 1) {
-            paitenceMeter += (patienceIncreaseSpeed * CalculateMood () * internalMoodSetting * Time.deltaTime);
-        }
+            if (paitenceMeter < 1) {
+                paitenceMeter += (patienceIncreaseSpeed * CalculateMood () * internalMoodSetting * Time.deltaTime);
+            }
 
-        patientTimer.value = paitenceMeter;
-        hungrySlider.value = hungerMeter;
+            patientTimer.value = paitenceMeter;
+            hungrySlider.value = hungerMeter;
+        } else {
+            hungrySlider.transform.localScale = Vector3.zero;
+        }
     }
 
     private void OnTriggerEnter (Collider other) {
