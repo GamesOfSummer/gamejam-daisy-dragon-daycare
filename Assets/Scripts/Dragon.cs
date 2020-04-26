@@ -210,7 +210,7 @@ public class Dragon : MonoBehaviour {
     }
 
     public bool canBeReleased () {
-        return paitenceMeter >.95F;
+        return paitenceMeter >.95F && status == StatusAilment.None;
     }
 
     private void Feed (FoodType type) {
