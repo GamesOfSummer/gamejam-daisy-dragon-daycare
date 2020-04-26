@@ -171,17 +171,28 @@ public class Dragon : MonoBehaviour {
 
     bool hasPooped = false;
     bool cleanedUpPoop = false;
+
+    GameObject poopObj;
     private void Poop () {
 
-        if (hungerMeter >.7F && !hasPooped) {
+        if (hungerMeter >.6F && !hasPooped) {
             hasPooped = true;
+            Debug.Log ("pooped");
 
-            var poopObj = GameController.Instance.SpawnObject (poop);
+            poopObj = GameController.Instance.SpawnObject (poop);
             var pos = transform.position;
             poopObj.transform.position = new Vector3 (pos.x, pos.y, pos.z);
 
         }
+    }
 
+    public bool NeedToCleanupPoop () {
+        return (hasPooped && !cleanedUpPoop);
+    }
+
+    public void CleanupPoop () {
+        cleanedUpPoop = true;
+        Destroy (poopObj, 0.5F);
     }
 
     private void CalculateMoodSummaryInstantly () {
@@ -210,7 +221,7 @@ public class Dragon : MonoBehaviour {
     }
 
     public bool canBeReleased () {
-        return paitenceMeter >.95F && status == StatusAilment.None;
+        return paitenceMeter >.95F && status == StatusAilment.None && NeedToCleanupPoop ();
     }
 
     private void Feed (FoodType type) {
