@@ -172,6 +172,14 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public void HealDragon () {
+        var dragon = _player.GetComponent<PlayerController> ().GetCurrentDragon ();
+
+        if (dragon != null && dragon.GetComponent<Dragon> ().NeedToCleanupPoop ()) {
+            dragon.GetComponent<Dragon> ().HealDragon ();
+        }
+    }
+
     private bool isGameOver () {
         return allDragonsSpawned && !spawnPointTrackers.Where (x => x.locked == true).Any ();
     }

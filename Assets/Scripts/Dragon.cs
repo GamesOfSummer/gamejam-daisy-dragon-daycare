@@ -169,9 +169,11 @@ public class Dragon : MonoBehaviour {
     }
 
     public void HealDragon () {
+        Debug.Log ("healed");
         status = StatusAilment.None;
         hotIcon.enabled = false;
         coldIcon.enabled = false;
+        internalMoodSetting = 1.0F;
     }
 
     bool hasPooped = false;

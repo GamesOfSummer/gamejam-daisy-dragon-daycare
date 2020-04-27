@@ -822,6 +822,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 50.350006
       objectReference: {fileID: 0}
+    - target: {fileID: 7525346664390079925, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1176794426}
+    - target: {fileID: 7525346664390079925, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HealDragon
+      objectReference: {fileID: 0}
     - target: {fileID: 7525346664390180882, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1141,6 +1151,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -40.30002
       objectReference: {fileID: 0}
+    - target: {fileID: 7525346665457625477, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346665457625477, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346665457625478, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7b4112c01ae6aeb4ba8e3fcf34444163,
+        type: 3}
     - target: {fileID: 7525346665680183989, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1160,6 +1186,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 50.350006
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525346665896332494, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1176794426}
+    - target: {fileID: 7525346665896332494, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HealDragon
       objectReference: {fileID: 0}
     - target: {fileID: 7525346666080065515, guid: 6b68a9ac50ad42e408bb9d750a7149d9,
         type: 3}
