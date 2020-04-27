@@ -162,11 +162,16 @@ public class Dragon : MonoBehaviour {
                     status = StatusAilment.Cold;
                     coldIcon.enabled = true;
                 }
-
             }
 
         }
 
+    }
+
+    public void HealDragon () {
+        status = StatusAilment.None;
+        hotIcon.enabled = false;
+        coldIcon.enabled = false;
     }
 
     bool hasPooped = false;

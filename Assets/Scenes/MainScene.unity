@@ -2158,7 +2158,7 @@ GameObject:
   - component: {fileID: 1351879934}
   - component: {fileID: 1351879933}
   m_Layer: 0
-  m_Name: FLOOR
+  m_Name: FLOOR FOR POOP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2185,7 +2185,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351879932}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
