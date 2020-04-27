@@ -112,7 +112,7 @@ public class Dragon : MonoBehaviour {
 
         if (_player != null && Input.GetMouseButton (0)) {
             if (!particle.isPlaying) {
-                particle.Play ();
+                //particle.Play ();
                 beingPet = true;
             }
 
@@ -169,7 +169,6 @@ public class Dragon : MonoBehaviour {
     }
 
     public void HealDragon () {
-        Debug.Log ("healed");
         status = StatusAilment.None;
         hotIcon.enabled = false;
         coldIcon.enabled = false;
@@ -189,7 +188,6 @@ public class Dragon : MonoBehaviour {
             poopObj = GameController.Instance.SpawnObject (poop);
             var pos = transform.position;
             poopObj.transform.position = new Vector3 (pos.x, pos.y, pos.z);
-
         }
     }
 

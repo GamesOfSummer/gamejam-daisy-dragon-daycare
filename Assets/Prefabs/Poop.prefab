@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6469355262430752859}
   - component: {fileID: 6469355262430752836}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6469355263136289468}
   - component: {fileID: 6469355263136289470}
   - component: {fileID: 1062867888397270264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Poop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

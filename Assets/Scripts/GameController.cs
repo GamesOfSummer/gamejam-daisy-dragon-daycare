@@ -175,7 +175,7 @@ public class GameController : MonoBehaviour {
     public void HealDragon () {
         var dragon = _player.GetComponent<PlayerController> ().GetCurrentDragon ();
 
-        if (dragon != null && dragon.GetComponent<Dragon> ().NeedToCleanupPoop ()) {
+        if (dragon != null) {
             dragon.GetComponent<Dragon> ().HealDragon ();
         }
     }
