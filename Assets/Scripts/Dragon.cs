@@ -13,14 +13,19 @@ public enum StatusAilment {
 public class Dragon : MonoBehaviour {
 
     [Header ("Settings - please tweak!")]
+    [Range(15.0,100.00)]
     public float hungerDepletionSpeed = 15.0F;
+    [Range(15.0,100.00)]
     public float hungerIncreaseAmount = 70.0F;
 
+[Range(15.0,100.00)]
     public float paienceIncreaseBonus = 15.0F;
+    [Range(15.0,100.00)]
     public float paienceDepletionSpeed = 15.0F;
+[Range(15.0,100.00)]
     public float patienceIncreaseSpeed = 50.0F;
 
-    [Header ("Range => 1 - 100")]
+    [Range(0.0,100.00)]
     public float chanceToGetAStatusAilment = 5.0F;
 
     [HideInInspector]
@@ -119,7 +124,6 @@ public class Dragon : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             var holder = ray.GetPoint (1);
             // Debug.Log (holder);
-
             // Debug.Log (Vector3.Distance (prefferedPettingSpot.transform.position, holder));
 
         }
@@ -137,7 +141,7 @@ public class Dragon : MonoBehaviour {
     private IEnumerator ProcessEmotions () {
 
         while (true) {
-            yield return new WaitForSeconds (2.0F);
+            yield return new WaitForSeconds (5.0F);
             CalculateMoodSummaryInstantly ();
             Poop ();
             AddStatusAilment ();
@@ -226,7 +230,7 @@ public class Dragon : MonoBehaviour {
     }
 
     public bool canBeReleased () {
-        return paitenceMeter >.95F && status == StatusAilment.None && NeedToCleanupPoop ();
+        return paitenceMeter >.95F && status == StatusAilment.None && !NeedToCleanupPoop ();
     }
 
     private void Feed (FoodType type) {
