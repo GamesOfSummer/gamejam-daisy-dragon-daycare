@@ -88,7 +88,6 @@ public class GameController : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
     void Update () {
 
         if (GameState.Instance.IsCurrentStateTitle () && Input.GetMouseButton (0)) {
