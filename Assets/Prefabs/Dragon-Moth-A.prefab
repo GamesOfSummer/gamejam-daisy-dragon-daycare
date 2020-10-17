@@ -5105,9 +5105,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hungerDepletionSpeed: 0.03
   hungerIncreaseAmount: 7
-  paienceIncreaseBonus: 33.8
+  paienceIncreaseBonus: 28.4
   paienceDepletionSpeed: 15
-  patienceIncreaseSpeed: 23.4
+  patienceIncreaseSpeed: 15
   chanceToGetAStatusAilment: 15
   dragonId: 
   poop: {fileID: 6469355263136289459, guid: 483a3ffe983c3ad4db2aad6f023505fe, type: 3}
@@ -5117,7 +5117,7 @@ MonoBehaviour:
   happyIcon: {fileID: 0}
   particle: {fileID: 194183903}
   hungerMeter: 1
-  paitenceMeter: 0
+  patienceMeter: 0
 --- !u!1001 &2024680420516859721
 PrefabInstance:
   m_ObjectHideFlags: 0
