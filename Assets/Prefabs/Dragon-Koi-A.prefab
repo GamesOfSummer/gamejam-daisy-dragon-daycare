@@ -5103,16 +5103,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67536077637b2c14e94aca55f81458f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerDepletionSpeed: 0.001
-  hungerIncreaseAmount: 0.0348
-  paienceIncreaseBonus: 0.0018
-  patienceIncreaseSpeed: 0.0372
-  chanceToGetAStatusAilment: 0.005
+  hungerDepletionSpeed: 0.0118
+  hungerIncreaseWhenFed: 0.132
+  hungerIncreaseFavoriteFoodBonus: 0.0118
+  patienceIncreaseBonus: 0.001
+  patienceIncreaseSpeed: 0.0082
+  chanceToGetAStatusAilment: 0.547
   dragonId: 
   poop: {fileID: 6469355263136289459, guid: 483a3ffe983c3ad4db2aad6f023505fe, type: 3}
   likedFood: 0
   dislikedFood: 1
-  happyIcon: {fileID: 0}
   particle: {fileID: 194183903}
   hungerMeter: 1
   patienceMeter: 0

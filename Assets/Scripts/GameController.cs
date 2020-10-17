@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour {
         if (GameState.Instance.IsCurrentStateTitle () && Input.GetMouseButton (0)) {
             GameState.Instance.ChangeState_Play ();
             ToggleGameplayUI ();
-            StartCoroutine (SpawnDragonsWhileGameIsRunning (1.0f));
+            StartCoroutine (SpawnDragonsWhileGameIsRunning (3.0f));
         }
     }
 
@@ -129,6 +129,7 @@ public class GameController : MonoBehaviour {
         SpawnPointsTracker location = getRandomDragonSpawnLocation ();
         var dragon = _pool.spawnObject (dragonPrefab, location.SpawnHere, Quaternion.identity);
         dragon.GetComponent<Dragon> ().dragonId = location.dragonId;
+        dragon.GetComponent<Dragon> ().ResetDragon ();
     }
 
     public void ReleaseDragon () {
