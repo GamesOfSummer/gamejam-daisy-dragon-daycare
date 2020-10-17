@@ -7,11 +7,15 @@ public class Dragon : MonoBehaviour {
     [Header ("Settings - please tweak!")]
     [Range (.001F, .05F)]
     public float hungerDepletionSpeed = 0.001F;
-    [Range (.001F, .05F)]
-    public float hungerIncreaseAmount = 0.001F;
+
+    [Range (.1F, .5F)]
+    public float hungerIncreaseWhenFed = 0.1F;
 
     [Range (.001F, .05F)]
-    public float paienceIncreaseBonus = 0.001F;
+    public float hungerIncreaseFavoriteFoodBonus = 0.001F;
+
+    [Range (.001F, .05F)]
+    public float patienceIncreaseBonus = 0.001F;
 
     [Range (.001F, .05F)]
     public float patienceIncreaseSpeed = 0.001F;
@@ -32,7 +36,7 @@ public class Dragon : MonoBehaviour {
 
     private Image sickIcon;
 
-    public Image happyIcon;
+    private Image happyIcon;
     private Image sadIcon;
 
     private Slider hungrySlider;
@@ -52,10 +56,7 @@ public class Dragon : MonoBehaviour {
 
     private StatusAilment status = StatusAilment.None;
 
-    private bool canRelease = false;
-
     void Start () {
-
         var canvas = GetComponentInChildren<CanvasUI> ();
         happyIcon = canvas.happyIcon;
         sadIcon = canvas.sadIcon;
@@ -67,18 +68,7 @@ public class Dragon : MonoBehaviour {
         hungrySlider = canvas.hungrySlider;
         patientTimer = canvas.patientTimer;
 
-        particle.Stop ();
-
-        hungrySlider.maxValue = 1.0f;
-        hungerMeter = 0.7F;
-        patientTimer.maxValue = 1.0f;
-
-        hotIcon.enabled = false;
-        coldIcon.enabled = false;
-
-        happyIcon.enabled = false;
-        sadIcon.enabled = false;
-        sickIcon.enabled = false;
+        ResetDragon ();
         StartCoroutine (ProcessEmotions ());
     }
 
@@ -155,10 +145,12 @@ public class Dragon : MonoBehaviour {
         while (!canBeReleased ()) {
             EnableCorrectMoodIcon ();
 
-            if (Random.Range (0, 4) < 2) {
-                Poop ();
-            } else {
-                AddStatusAilment ();
+            if (patienceMeter >.5F && patienceMeter < .8F) {
+                if (Random.Range (0, 4) < 2) {
+                    Poop ();
+                } else {
+                    AddStatusAilment ();
+                }
             }
 
             yield return new WaitForSeconds (3.0F);
@@ -168,7 +160,7 @@ public class Dragon : MonoBehaviour {
     bool hasGottenAStatusAilment = false;
     private void AddStatusAilment () {
 
-        if (!hasGottenAStatusAilment && patienceMeter >.5F && patienceMeter < .8F) {
+        if (!hasGottenAStatusAilment) {
 
             if (Random.Range (0.0F, 1.0F) < chanceToGetAStatusAilment) {
                 hasGottenAStatusAilment = true;
@@ -201,8 +193,6 @@ public class Dragon : MonoBehaviour {
 
         if (hungerMeter >.6F && !hasPooped) {
             hasPooped = true;
-            Debug.Log ("pooped");
-
             poopObj = GameController.Instance.SpawnObject (poop);
             var pos = transform.position;
             poopObj.transform.position = new Vector3 (pos.x, pos.y, pos.z);
@@ -219,17 +209,18 @@ public class Dragon : MonoBehaviour {
     }
 
     private void EnableCorrectMoodIcon () {
+        happyIcon.enabled = false;
+        sadIcon.enabled = false;
+        sickIcon.enabled = false;
+
         if (status != StatusAilment.None) {
             sickIcon.enabled = true;
         } else {
             float mood = CalculateMood ();
 
-            happyIcon.enabled = false;
-            sadIcon.enabled = false;
-
             if (mood < .2F) {
                 sadIcon.enabled = true;
-            } else if (mood >.6F) {
+            } else if (mood >.8F) {
                 happyIcon.enabled = true;
             }
         }
@@ -243,12 +234,12 @@ public class Dragon : MonoBehaviour {
             mood -= .5F;
         }
         if (NeedToCleanupPoop ()) {
-            mood -= .5F;
+            return 0;
         }
 
         if (hungerMeter < .3F) {
-            mood -= .5F;
-        } else if (hungerMeter < .7F) {
+            return 0;
+        } else if (hungerMeter >.7F) {
             mood += .5F;
         }
 
@@ -270,16 +261,43 @@ public class Dragon : MonoBehaviour {
     }
 
     private void feedDragonLikedFood () {
-        patienceMeter += paienceIncreaseBonus;
-        hungerMeter += hungerIncreaseAmount;
+        patienceMeter += patienceIncreaseBonus;
+        hungerMeter += hungerIncreaseFavoriteFoodBonus;
     }
 
     private void feedDragon () {
-        hungerMeter += hungerIncreaseAmount;
+        hungerMeter += hungerIncreaseWhenFed;
     }
 
     private void feedDragonDislikedFood () {
-        patienceMeter -= paienceIncreaseBonus;
-        hungerMeter += hungerIncreaseAmount;
+        patienceMeter -= patienceIncreaseBonus;
+        hungerMeter += hungerIncreaseWhenFed;
+    }
+
+    public void ResetDragon () {
+        if (particle != null && hungrySlider != null) {
+            particle.Stop ();
+
+            patienceMeter = 0;
+            patientTimer.value = 0;
+            patientTimer.maxValue = 1.0f;
+
+            hungerMeter = 0.5F;
+            hungrySlider.value = 0.5F;
+            hungrySlider.maxValue = 1.0f;
+
+            hotIcon.enabled = false;
+            coldIcon.enabled = false;
+            happyIcon.enabled = false;
+            sadIcon.enabled = false;
+            sickIcon.enabled = false;
+
+            hasPooped = false;
+            cleanedUpPoop = false;
+            hasGottenAStatusAilment = false;
+        } else {
+            Debug.Log ("Null values on reset dragon");
+        }
+
     }
 }
