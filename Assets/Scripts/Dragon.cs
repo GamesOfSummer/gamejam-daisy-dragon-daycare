@@ -5,29 +5,25 @@ using UnityEngine.UI;
 
 public class Dragon : MonoBehaviour {
     [Header ("Settings - please tweak!")]
-    [Range (15.0F, 100.0F)]
-    public float hungerDepletionSpeed = 15.0F;
-    [Range (15.0F, 100.0F)]
-    public float hungerIncreaseAmount = 70.0F;
+    [Range (.001F, .05F)]
+    public float hungerDepletionSpeed = 0.001F;
+    [Range (.001F, .05F)]
+    public float hungerIncreaseAmount = 0.001F;
 
-    [Range (15.0F, 100.0F)]
-    public float paienceIncreaseBonus = 15.0F;
-    [Range (15.0F, 100.0F)]
-    public float paienceDepletionSpeed = 15.0F;
-    [Range (15.0F, 100.0F)]
-    public float patienceIncreaseSpeed = 50.0F;
+    [Range (.001F, .05F)]
+    public float paienceIncreaseBonus = 0.001F;
 
-    [Range (15.0F, 100.0F)]
-    public float chanceToGetAStatusAilment = 5.0F;
+    [Range (.001F, .05F)]
+    public float patienceIncreaseSpeed = 0.001F;
+
+    [Range (.0F, 1.0F)]
+    public float chanceToGetAStatusAilment = 0.0F;
 
     [HideInInspector]
     public string dragonId;
 
     [Header ("DO NOT TOUCH BELOW THIS LINE")]
     public GameObject poop;
-
-    public GameObject prefferedPettingSpot;
-
     public FoodType likedFood;
     public FoodType dislikedFood;
 
@@ -157,10 +153,15 @@ public class Dragon : MonoBehaviour {
 
     private IEnumerator ProcessEmotions () {
         while (!canBeReleased ()) {
-            TurnOnHappyOrSadIcons ();
-            Poop ();
-            AddStatusAilment ();
-            yield return new WaitForSeconds (5.0F);
+            EnableCorrectMoodIcon ();
+
+            if (Random.Range (0, 4) < 2) {
+                Poop ();
+            } else {
+                AddStatusAilment ();
+            }
+
+            yield return new WaitForSeconds (3.0F);
         }
     }
 
@@ -169,11 +170,11 @@ public class Dragon : MonoBehaviour {
 
         if (!hasGottenAStatusAilment && patienceMeter >.5F && patienceMeter < .8F) {
 
-            if (Random.Range (0, 101) < chanceToGetAStatusAilment) {
+            if (Random.Range (0.0F, 1.0F) < chanceToGetAStatusAilment) {
                 hasGottenAStatusAilment = true;
                 Debug.Log ("SICK");
 
-                if (Random.Range (1, 3) < 2) {
+                if (Random.Range (0, 4) < 2) {
                     status = StatusAilment.Hot;
                     hotIcon.enabled = true;
 
@@ -217,18 +218,22 @@ public class Dragon : MonoBehaviour {
         Destroy (poopObj, 0.5F);
     }
 
-    private void TurnOnHappyOrSadIcons () {
-        float mood = CalculateMood ();
-        //Debug.Log (mood);
+    private void EnableCorrectMoodIcon () {
+        if (status != StatusAilment.None) {
+            sickIcon.enabled = true;
+        } else {
+            float mood = CalculateMood ();
 
-        happyIcon.enabled = false;
-        sadIcon.enabled = false;
+            happyIcon.enabled = false;
+            sadIcon.enabled = false;
 
-        if (mood < .2F) {
-            sadIcon.enabled = true;
-        } else if (mood >.6F) {
-            happyIcon.enabled = true;
+            if (mood < .2F) {
+                sadIcon.enabled = true;
+            } else if (mood >.6F) {
+                happyIcon.enabled = true;
+            }
         }
+
     }
 
     private float CalculateMood () {
@@ -240,10 +245,11 @@ public class Dragon : MonoBehaviour {
         if (NeedToCleanupPoop ()) {
             mood -= .5F;
         }
+
         if (hungerMeter < .3F) {
             mood -= .5F;
-        } else if (hungerMeter < .9F) {
-            mood = .5F;
+        } else if (hungerMeter < .7F) {
+            mood += .5F;
         }
 
         return mood;
