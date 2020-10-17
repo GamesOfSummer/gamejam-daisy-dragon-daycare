@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,9 +50,7 @@ public class Dragon : MonoBehaviour {
     public float hungerMeter = 0.5F;
 
     [Range (0, 1)]
-    public float paitenceMeter = 0;
-
-    private float internalMoodSetting = 1.0F;
+    public float patienceMeter = 0;
 
     private GameObject _player = null;
 
@@ -93,14 +92,28 @@ public class Dragon : MonoBehaviour {
                 hungerMeter -= (hungerDepletionSpeed * Time.deltaTime);
             }
 
-            if (paitenceMeter < 1) {
-                paitenceMeter += (patienceIncreaseSpeed * CalculateMood () * internalMoodSetting * Time.deltaTime);
+            if (patienceMeter < 1) {
+                patienceMeter += (patienceIncreaseSpeed * CalculateMood () * Time.deltaTime);
             }
 
-            patientTimer.value = paitenceMeter;
+            patientTimer.value = patienceMeter;
             hungrySlider.value = hungerMeter;
         } else {
-            //hungrySlider.transform.localScale = Vector3.zero;
+            happyIcon.enabled = true;
+            hungrySlider.value = 1.0F;
+
+            var fill = hungrySlider.GetComponentsInChildren<UnityEngine.UI.Image> ()
+                .FirstOrDefault (t => t.name == "Fill");
+            if (fill != null) {
+                fill.color = Color.green;
+            }
+
+            fill = patientTimer.GetComponentsInChildren<UnityEngine.UI.Image> ()
+                .FirstOrDefault (t => t.name == "Fill");
+            if (fill != null) {
+                fill.color = Color.green;
+            }
+
         }
     }
 
@@ -143,24 +156,22 @@ public class Dragon : MonoBehaviour {
     }
 
     private IEnumerator ProcessEmotions () {
-
-        while (true) {
-            yield return new WaitForSeconds (5.0F);
-            CalculateMoodSummaryInstantly ();
+        while (!canBeReleased ()) {
+            TurnOnHappyOrSadIcons ();
             Poop ();
             AddStatusAilment ();
+            yield return new WaitForSeconds (5.0F);
         }
     }
 
     bool hasGottenAStatusAilment = false;
     private void AddStatusAilment () {
 
-        if (!hasGottenAStatusAilment && paitenceMeter >.5F && paitenceMeter < .9F) {
+        if (!hasGottenAStatusAilment && patienceMeter >.5F && patienceMeter < .8F) {
 
             if (Random.Range (0, 101) < chanceToGetAStatusAilment) {
                 hasGottenAStatusAilment = true;
                 Debug.Log ("SICK");
-                internalMoodSetting = 0;
 
                 if (Random.Range (1, 3) < 2) {
                     status = StatusAilment.Hot;
@@ -171,7 +182,6 @@ public class Dragon : MonoBehaviour {
                     coldIcon.enabled = true;
                 }
             }
-
         }
 
     }
@@ -180,7 +190,6 @@ public class Dragon : MonoBehaviour {
         status = StatusAilment.None;
         hotIcon.enabled = false;
         coldIcon.enabled = false;
-        internalMoodSetting = 1.0F;
     }
 
     bool hasPooped = false;
@@ -208,9 +217,8 @@ public class Dragon : MonoBehaviour {
         Destroy (poopObj, 0.5F);
     }
 
-    private void CalculateMoodSummaryInstantly () {
-        float mood = CalculateMood () * internalMoodSetting;
-
+    private void TurnOnHappyOrSadIcons () {
+        float mood = CalculateMood ();
         //Debug.Log (mood);
 
         happyIcon.enabled = false;
@@ -224,17 +232,25 @@ public class Dragon : MonoBehaviour {
     }
 
     private float CalculateMood () {
+        var mood = 1.0F;
+
+        if (status != StatusAilment.None) {
+            mood -= .5F;
+        }
+        if (NeedToCleanupPoop ()) {
+            mood -= .5F;
+        }
         if (hungerMeter < .3F) {
-            return 0;
+            mood -= .5F;
         } else if (hungerMeter < .9F) {
-            return 0.7F;
+            mood = .5F;
         }
 
-        return 1;
+        return mood;
     }
 
     public bool canBeReleased () {
-        return paitenceMeter >.95F && status == StatusAilment.None && !NeedToCleanupPoop ();
+        return patienceMeter >.95F && status == StatusAilment.None && !NeedToCleanupPoop ();
     }
 
     private void Feed (FoodType type) {
@@ -248,19 +264,16 @@ public class Dragon : MonoBehaviour {
     }
 
     private void feedDragonLikedFood () {
-        paitenceMeter += paienceIncreaseBonus;
+        patienceMeter += paienceIncreaseBonus;
         hungerMeter += hungerIncreaseAmount;
-        internalMoodSetting = 2.0F;
     }
 
     private void feedDragon () {
         hungerMeter += hungerIncreaseAmount;
-        internalMoodSetting = 1.0F;
     }
 
     private void feedDragonDislikedFood () {
-        paitenceMeter -= paienceIncreaseBonus;
+        patienceMeter -= paienceIncreaseBonus;
         hungerMeter += hungerIncreaseAmount;
-        internalMoodSetting = 0.5F;
     }
 }
