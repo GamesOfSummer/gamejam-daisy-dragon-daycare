@@ -11,8 +11,8 @@ public class Dragon : MonoBehaviour {
     [Range (.1F, .5F)]
     public float hungerIncreaseWhenFed = 0.1F;
 
-    [Range (.001F, .05F)]
-    public float hungerIncreaseFavoriteFoodBonus = 0.001F;
+    [Range (.001F, .7F)]
+    public float hungerIncreaseFavoriteFoodBonus = 0.1F;
 
     [Range (.001F, .05F)]
     public float patienceIncreaseBonus = 0.001F;
@@ -42,10 +42,13 @@ public class Dragon : MonoBehaviour {
     private Slider hungrySlider;
     private Slider patientTimer;
 
+    private bool mouseIsCurrentlyOnMe = false;
+
     private bool beingPet = false;
 
-    public ParticleSystem particle;
-
+    public GameObject heartsParticleEffect;
+    public GameObject hotParticleEffect;
+    public GameObject coldParticleEffect;
     [Range (0, 1)]
     public float hungerMeter = 0.5F;
 
@@ -105,7 +108,7 @@ public class Dragon : MonoBehaviour {
 
     private void OnTriggerEnter (Collider other) {
 
-        if (other.tag == "Food") {
+        if (other.tag == "Food" && hungerMeter < 1.0F) {
             Destroy (other.gameObject);
             Feed (other.GetComponent<Food> ().type);
         }
@@ -119,26 +122,37 @@ public class Dragon : MonoBehaviour {
     private void OnTriggerStay (Collider other) {
 
         if (_player != null && Input.GetMouseButton (0)) {
-            if (!particle.isPlaying) {
-                //particle.Play ();
+            if (!heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
+                Debug.Log ("play");
+                heartsParticleEffect.GetComponent<ParticleSystem> ().Play ();
                 beingPet = true;
             }
 
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             var holder = ray.GetPoint (1);
-            // Debug.Log (holder);
+            Debug.Log (holder);
             // Debug.Log (Vector3.Distance (prefferedPettingSpot.transform.position, holder));
 
-        }
-
-        if (particle.isPlaying) {
-            particle.Stop ();
+        } else if (heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
+            heartsParticleEffect.GetComponent<ParticleSystem> ().Stop ();
         }
     }
 
     private void OnTriggerExit (Collider other) {
         beingPet = false;
         _player = null;
+    }
+
+    void OnMouseEnter () {
+        Debug.Log ("enter");
+        mouseIsCurrentlyOnMe = true;
+        Cursor.SetCursor (GameController.Instance.mouseHandImage, Vector2.zero, CursorMode.Auto);
+    }
+
+    void OnMouseExit () {
+        Debug.Log ("exit");
+        mouseIsCurrentlyOnMe = false;
+        Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
     }
 
     private IEnumerator ProcessEmotions () {
@@ -166,13 +180,15 @@ public class Dragon : MonoBehaviour {
                 hasGottenAStatusAilment = true;
                 Debug.Log ("SICK");
 
-                if (Random.Range (0, 4) < 2) {
+                if (Random.Range (0, 5) < 2) {
                     status = StatusAilment.Hot;
                     hotIcon.enabled = true;
+                    hotParticleEffect.GetComponent<ParticleSystem> ().Play ();
 
                 } else {
                     status = StatusAilment.Cold;
                     coldIcon.enabled = true;
+                    coldParticleEffect.GetComponent<ParticleSystem> ().Play ();
                 }
             }
         }
@@ -182,7 +198,9 @@ public class Dragon : MonoBehaviour {
     public void HealDragon () {
         status = StatusAilment.None;
         hotIcon.enabled = false;
+        hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
         coldIcon.enabled = false;
+        hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
     }
 
     bool hasPooped = false;
@@ -275,8 +293,10 @@ public class Dragon : MonoBehaviour {
     }
 
     public void ResetDragon () {
-        if (particle != null && hungrySlider != null) {
-            particle.Stop ();
+        if (heartsParticleEffect != null && hungrySlider != null) {
+            hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
+            coldParticleEffect.GetComponent<ParticleSystem> ().Stop ();
+            heartsParticleEffect.GetComponent<ParticleSystem> ().Stop ();
 
             patienceMeter = 0;
             patientTimer.value = 0;

@@ -1246,6 +1246,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a,
         type: 3}
+    - target: {fileID: 2087433504557567185, guid: d9180285f0bcbb14cb9905c96f4c77a3,
+        type: 3}
+      propertyPath: mouseHandImage
+      value: 
+      objectReference: {fileID: 2800000, guid: 92325b3379ce2c44fa8910d70cadfe06, type: 3}
     - target: {fileID: 2087433504557567214, guid: d9180285f0bcbb14cb9905c96f4c77a3,
         type: 3}
       propertyPath: m_Name

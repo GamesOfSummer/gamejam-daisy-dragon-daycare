@@ -63,6 +63,8 @@ public class GameController : MonoBehaviour {
     public GameObject blueFruit;
     public GameObject yellowFruit;
 
+    public Texture2D mouseHandImage;
+
     private GameObject _player;
 
     private GameObject releaseDragonButton;
