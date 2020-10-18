@@ -45,6 +45,17 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private void OnTriggerStay (Collider other) {
+
+        if (other.tag == "Dragon") {
+            _dragon = other.gameObject;
+
+            if (_dragon.GetComponent<Dragon> ().canBeReleased ()) {
+                GameController.Instance.TurnOnReleaseButton ();
+            }
+        }
+    }
+
     private void OnTriggerExit (Collider other) {
 
         if (other.tag == "Dragon") {
