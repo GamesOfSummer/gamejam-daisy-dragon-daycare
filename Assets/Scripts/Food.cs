@@ -21,6 +21,8 @@ public class Food : MonoBehaviour {
     private Vector3 startPosition;
     private void Start () {
         startPosition = transform.position;
+
+        Destroy (this.gameObject, 5.0F);
     }
 
     private void Update () {
