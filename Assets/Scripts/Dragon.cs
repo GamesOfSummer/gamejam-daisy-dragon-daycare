@@ -45,6 +45,9 @@ public class Dragon : MonoBehaviour {
     private bool mouseIsCurrentlyOnMe = false;
 
     private bool beingPet = false;
+    private bool hasBeenPetOnce = false;
+
+    private bool hasBeenFedFavoriteFoodOnce = false;
 
     public GameObject heartsParticleEffect;
     public GameObject hotParticleEffect;
@@ -122,6 +125,8 @@ public class Dragon : MonoBehaviour {
     private void OnTriggerStay (Collider other) {
 
         if (_player != null && Input.GetMouseButton (0)) {
+            hasBeenPetOnce = true;
+
             if (!heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
                 Debug.Log ("play");
                 heartsParticleEffect.GetComponent<ParticleSystem> ().Play ();
@@ -261,6 +266,14 @@ public class Dragon : MonoBehaviour {
             mood += .5F;
         }
 
+        if (hasBeenPetOnce == true) {
+            mood += 2.5F;
+        }
+
+        if (hasBeenFedFavoriteFoodOnce == true) {
+            mood += 2.5F;
+        }
+
         return mood;
     }
 
@@ -279,6 +292,7 @@ public class Dragon : MonoBehaviour {
     }
 
     private void feedDragonLikedFood () {
+        hasBeenFedFavoriteFoodOnce = true;
         patienceMeter += patienceIncreaseBonus;
         hungerMeter += hungerIncreaseFavoriteFoodBonus;
     }
@@ -312,9 +326,12 @@ public class Dragon : MonoBehaviour {
             sadIcon.enabled = false;
             sickIcon.enabled = false;
 
+            hasBeenPetOnce = false;
             hasPooped = false;
             cleanedUpPoop = false;
             hasGottenAStatusAilment = false;
+
+            hasBeenFedFavoriteFoodOnce = false;
         } else {
             Debug.Log ("Null values on reset dragon");
         }
