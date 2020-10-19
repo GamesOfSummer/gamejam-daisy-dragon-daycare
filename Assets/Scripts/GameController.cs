@@ -5,6 +5,7 @@ using PKG;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Linq;
+using UnityEngine.UI;
 
 [Serializable]
 public class Rounds {
@@ -70,6 +71,13 @@ public class GameController : MonoBehaviour {
     private GameObject releaseDragonButton;
     private bool allDragonsSpawned = false;
 
+    //Present Drop System Variables
+    public float presentDropChance = 25f;
+    public GameObject [] presentPool;
+    public GameObject presentBtn, newPresentBtn;
+    public Image present1, present2, present3;
+
+
     private void Awake () {
 
         Instance = this;
@@ -105,6 +113,51 @@ public class GameController : MonoBehaviour {
 
     public void TurnOffReleaseButton () {
         releaseDragonButton.SetActive (false);
+    }
+
+    public void ShouldPresentDrop (){
+        
+            //drop present
+                float dropChance = Random.Range(0f,100f);
+                Debug.Log("Is " + dropChance + " < " + presentDropChance + "?");
+
+                if(dropChance < presentDropChance)
+                {
+                    Debug.Log("Present Dropped!");
+                    int randomItem = Random.Range(0, presentPool.Length);
+                    Debug.Log(randomItem);
+                    presentBtn.SetActive(false);
+                    newPresentBtn.SetActive(true);
+
+                switch(randomItem)
+        {
+                case 0:
+                present1.color = new Color(present1.color.r,present1.color.g,present1.color.b,1f);
+                Debug.Log(presentPool[randomItem] + " Item 0");
+
+                break;
+
+                case 1:
+                present2.color = new Color(present2.color.r,present2.color.g,present2.color.b,1f);
+                Debug.Log(presentPool[randomItem] + " Item 1");
+                break;
+
+                case 2:
+                present3.color = new Color(present3.color.r,present3.color.g,present3.color.b,1f);
+                Debug.Log(presentPool[randomItem] + " Item 2");
+                break;
+        }
+
+                    //Instantiate(presentPool[randomItem], transform.position, transform.rotation);
+                } else {
+                    Debug.Log("Sorry no present this time =/");
+                }
+
+    }
+
+    public void clearNewPresentIdicator(){
+                            newPresentBtn.SetActive(false);
+                            presentBtn.SetActive(true);
     }
 
     private IEnumerator SpawnDragonsWhileGameIsRunning (float waitTime) {
