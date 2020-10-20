@@ -266,7 +266,7 @@ MonoBehaviour:
   hungerIncreaseFavoriteFoodBonus: 0.0283
   patienceIncreaseBonus: 0.001
   patienceIncreaseSpeed: 0.0122
-  chanceToGetAStatusAilment: 0
+  chanceToGetAStatusAilment: 0.753
   dragonId: 
   poop: {fileID: 6469355263136289459, guid: 483a3ffe983c3ad4db2aad6f023505fe, type: 3}
   likedFood: 0
@@ -291,17 +291,17 @@ PrefabInstance:
     - target: {fileID: 8362309749975291168, guid: 209305f0f9b7348218e7fd717623c128,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2036524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362309749975291168, guid: 209305f0f9b7348218e7fd717623c128,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47776937
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362309749975291168, guid: 209305f0f9b7348218e7fd717623c128,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.468954
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362309749975291168, guid: 209305f0f9b7348218e7fd717623c128,
         type: 3}
@@ -372,17 +372,17 @@ PrefabInstance:
     - target: {fileID: 8362309749975291168, guid: 8352cad0ee9054a0b9320df1e8300fd8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2036524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362309749975291168, guid: 8352cad0ee9054a0b9320df1e8300fd8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47776937
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362309749975291168, guid: 8352cad0ee9054a0b9320df1e8300fd8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.468954
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362309749975291168, guid: 8352cad0ee9054a0b9320df1e8300fd8,
         type: 3}
@@ -598,17 +598,17 @@ PrefabInstance:
     - target: {fileID: 8362309749975291168, guid: ab134d6a895b64fecac68647ad0a5c07,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2036524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362309749975291168, guid: ab134d6a895b64fecac68647ad0a5c07,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47776937
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362309749975291168, guid: ab134d6a895b64fecac68647ad0a5c07,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.468954
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362309749975291168, guid: ab134d6a895b64fecac68647ad0a5c07,
         type: 3}
