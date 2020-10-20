@@ -1,117 +1,109 @@
 ﻿using System.Collections;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public enum StatusAilment {
+    None,
+    Hot,
+    Cold,
+    Sick
+}
+
 public class Dragon : MonoBehaviour {
+
     [Header ("Settings - please tweak!")]
-    [Range (.001F, .05F)]
-    public float hungerDepletionSpeed = 0.001F;
+    public float hungerDepletionSpeed = 15.0F;
+    public float hungerIncreaseAmount = 70.0F;
 
-    [Range (.1F, .5F)]
-    public float hungerIncreaseWhenFed = 0.1F;
+    public float paienceIncreaseBonus = 15.0F;
+    public float paienceDepletionSpeed = 15.0F;
+    public float patienceIncreaseSpeed = 50.0F;
 
-    [Range (.001F, .7F)]
-    public float hungerIncreaseFavoriteFoodBonus = 0.1F;
-
-    [Range (.001F, .05F)]
-    public float patienceIncreaseBonus = 0.001F;
-
-    [Range (.001F, .05F)]
-    public float patienceIncreaseSpeed = 0.001F;
-
-    [Range (.0F, 1.0F)]
-    public float chanceToGetAStatusAilment = 0.0F;
+    [Header ("Range => 1 - 100")]
+    public float chanceToGetAStatusAilment = 5.0F;
 
     [HideInInspector]
     public string dragonId;
 
+   [Header ("Dragon SFX")]
+     public AudioSource audioSource;
+     public AudioClip sfxChip1, sfxChirp2, sfxHungry, sfxPleased, sfxNotPleased, sfxSnore;
+    
     [Header ("DO NOT TOUCH BELOW THIS LINE")]
     public GameObject poop;
+
+    public GameObject prefferedPettingSpot;
+
     public FoodType likedFood;
     public FoodType dislikedFood;
 
-    private Image hotIcon;
-    private Image coldIcon;
+    public Image hotIcon;
+    public Image coldIcon;
 
-    private Image sickIcon;
+    public Image sickIcon;
 
-    private Image happyIcon;
-    private Image sadIcon;
+    public Image happyIcon;
+    public Image sadIcon;
 
-    private Slider hungrySlider;
-    private Slider patientTimer;
-
-    private bool mouseIsCurrentlyOnMe = false;
+    public Slider hungrySlider;
+    public Slider patientTimer;
 
     private bool beingPet = false;
-    private bool hasBeenPetOnce = false;
 
-    private bool hasBeenFedFavoriteFoodOnce = false;
+    public ParticleSystem particle;
 
-    public GameObject heartsParticleEffect;
-    public GameObject hotParticleEffect;
-    public GameObject coldParticleEffect;
     [Range (0, 1)]
     public float hungerMeter = 0.5F;
 
     [Range (0, 1)]
-    public float patienceMeter = 0;
+    public float paitenceMeter = 0;
+
+    private float internalMoodSetting = 1.0F;
 
     private GameObject _player = null;
 
     private StatusAilment status = StatusAilment.None;
 
+    private bool canRelease = false;
+
     void Start () {
-        var canvas = GetComponentInChildren<CanvasUI> ();
-        happyIcon = canvas.happyIcon;
-        sadIcon = canvas.sadIcon;
-        sickIcon = canvas.sickIcon;
+        particle.Stop ();
 
-        hotIcon = canvas.hotIcon;
-        coldIcon = canvas.coldIcon;
+        hungrySlider.maxValue = 1.0f;
+        hungerMeter = 0.7F;
+        patientTimer.maxValue = 1.0f;
 
-        hungrySlider = canvas.hungrySlider;
-        patientTimer = canvas.patientTimer;
+        hotIcon.enabled = false;
+        coldIcon.enabled = false;
 
-        ResetDragon ();
+        happyIcon.enabled = false;
+        sadIcon.enabled = false;
         StartCoroutine (ProcessEmotions ());
     }
 
     void Update () {
+
         if (!canBeReleased ()) {
             if (hungerMeter > 0) {
                 hungerMeter -= (hungerDepletionSpeed * Time.deltaTime);
             }
 
-            if (patienceMeter < 1) {
-                patienceMeter += (patienceIncreaseSpeed * CalculateMood () * Time.deltaTime);
+            if (paitenceMeter < 1) {
+                paitenceMeter += (patienceIncreaseSpeed * CalculateMood () * internalMoodSetting * Time.deltaTime);
             }
 
-            patientTimer.value = patienceMeter;
+            patientTimer.value = paitenceMeter;
             hungrySlider.value = hungerMeter;
         } else {
-            happyIcon.enabled = true;
-            hungrySlider.value = 1.0F;
-
-            var fill = hungrySlider.GetComponentsInChildren<UnityEngine.UI.Image> ()
-                .FirstOrDefault (t => t.name == "Fill");
-            if (fill != null) {
-                fill.color = Color.green;
-            }
-
-            fill = patientTimer.GetComponentsInChildren<UnityEngine.UI.Image> ()
-                .FirstOrDefault (t => t.name == "Fill");
-            if (fill != null) {
-                fill.color = Color.green;
-            }
-
+            hungrySlider.transform.localScale = Vector3.zero;
         }
     }
 
     private void OnTriggerEnter (Collider other) {
 
-        if (other.tag == "Food" && hungerMeter < 1.0F) {
+        if (other.tag == "Food") {
             Destroy (other.gameObject);
             Feed (other.GetComponent<Food> ().type);
         }
@@ -119,27 +111,26 @@ public class Dragon : MonoBehaviour {
         if (other.tag == "Player") {
             _player = gameObject;
         }
-
     }
 
     private void OnTriggerStay (Collider other) {
 
         if (_player != null && Input.GetMouseButton (0)) {
-            hasBeenPetOnce = true;
-
-            if (!heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
-                Debug.Log ("play");
-                heartsParticleEffect.GetComponent<ParticleSystem> ().Play ();
+            if (!particle.isPlaying) {
+                //particle.Play ();
                 beingPet = true;
             }
 
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             var holder = ray.GetPoint (1);
-            Debug.Log (holder);
+            // Debug.Log (holder);
+
             // Debug.Log (Vector3.Distance (prefferedPettingSpot.transform.position, holder));
 
-        } else if (heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
-            heartsParticleEffect.GetComponent<ParticleSystem> ().Stop ();
+        }
+
+        if (particle.isPlaying) {
+            particle.Stop ();
         }
     }
 
@@ -148,67 +139,45 @@ public class Dragon : MonoBehaviour {
         _player = null;
     }
 
-    void OnMouseEnter () {
-        Debug.Log ("enter");
-        mouseIsCurrentlyOnMe = true;
-        Cursor.SetCursor (GameController.Instance.mouseHandImage, Vector2.zero, CursorMode.Auto);
-    }
-
-    void OnMouseExit () {
-        Debug.Log ("exit");
-        mouseIsCurrentlyOnMe = false;
-        Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
-    }
-
     private IEnumerator ProcessEmotions () {
-        while (!canBeReleased ()) {
-            EnableCorrectMoodIcon ();
 
-            if (patienceMeter >.5F && patienceMeter < .8F) {
-                if (Random.Range (0, 4) < 2) {
-                    Poop ();
-                } else {
-                    AddStatusAilment ();
-                }
-            }
-
-            yield return new WaitForSeconds (3.0F);
+        while (true) {
+            yield return new WaitForSeconds (2.0F);
+            CalculateMoodSummaryInstantly ();
+            Poop ();
+            AddStatusAilment ();
         }
     }
 
     bool hasGottenAStatusAilment = false;
     private void AddStatusAilment () {
 
-        if (!hasGottenAStatusAilment) {
+        if (!hasGottenAStatusAilment && paitenceMeter >.5F && paitenceMeter < .9F) {
 
-            if (Random.Range (0.0F, 1.0F) < chanceToGetAStatusAilment) {
+            if (Random.Range (0, 101) < chanceToGetAStatusAilment) {
                 hasGottenAStatusAilment = true;
-                sickIcon.enabled = true;
-                happyIcon.enabled = false;
-                sadIcon.enabled = false;
+                Debug.Log ("SICK");
+                internalMoodSetting = 0;
 
-                if (Random.Range (0, 5) < 2) {
+                if (Random.Range (1, 3) < 2) {
                     status = StatusAilment.Hot;
                     hotIcon.enabled = true;
-                    hotParticleEffect.GetComponent<ParticleSystem> ().Play ();
 
                 } else {
                     status = StatusAilment.Cold;
                     coldIcon.enabled = true;
-                    coldParticleEffect.GetComponent<ParticleSystem> ().Play ();
                 }
             }
+
         }
+
     }
 
     public void HealDragon () {
         status = StatusAilment.None;
-        sickIcon.enabled = false;
-
         hotIcon.enabled = false;
-        hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
         coldIcon.enabled = false;
-        hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
+        internalMoodSetting = 1.0F;
     }
 
     bool hasPooped = false;
@@ -219,6 +188,8 @@ public class Dragon : MonoBehaviour {
 
         if (hungerMeter >.6F && !hasPooped) {
             hasPooped = true;
+            Debug.Log ("pooped");
+
             poopObj = GameController.Instance.SpawnObject (poop);
             var pos = transform.position;
             poopObj.transform.position = new Vector3 (pos.x, pos.y, pos.z);
@@ -234,57 +205,37 @@ public class Dragon : MonoBehaviour {
         Destroy (poopObj, 0.5F);
     }
 
-    private void EnableCorrectMoodIcon () {
+    private void CalculateMoodSummaryInstantly () {
+        float mood = CalculateMood () * internalMoodSetting;
+
+        //Debug.Log (mood);
+
         happyIcon.enabled = false;
         sadIcon.enabled = false;
-        sickIcon.enabled = false;
 
-        if (status != StatusAilment.None) {
-            sickIcon.enabled = true;
-        } else {
-            float mood = CalculateMood ();
-
-            if (mood < .2F) {
-                sadIcon.enabled = true;
-            } else if (mood >.8F) {
-                happyIcon.enabled = true;
-            }
+        if (mood < .2F) {
+            sadIcon.enabled = true;
+        } else if (mood >.7F) {
+            happyIcon.enabled = true;
         }
-
     }
 
     private float CalculateMood () {
-        var mood = 1.0F;
-
-        if (status != StatusAilment.None) {
-            mood -= .5F;
-        }
-        if (NeedToCleanupPoop ()) {
-            return 0;
-        }
-
         if (hungerMeter < .3F) {
             return 0;
-        } else if (hungerMeter >.7F) {
-            mood += .5F;
+        } else if (hungerMeter < .9F) {
+            return 0.7F;
         }
 
-        if (hasBeenPetOnce == true) {
-            mood += 2.5F;
-        }
-
-        if (hasBeenFedFavoriteFoodOnce == true) {
-            mood += 2.5F;
-        }
-
-        return mood;
+        return 1;
     }
 
     public bool canBeReleased () {
-        return patienceMeter >.95F && status == StatusAilment.None && !NeedToCleanupPoop ();
+        return paitenceMeter >.95F && status == StatusAilment.None && NeedToCleanupPoop ();
     }
 
     private void Feed (FoodType type) {
+
         if (type == likedFood) {
             feedDragonLikedFood ();
         } else if (type == dislikedFood) {
@@ -292,66 +243,23 @@ public class Dragon : MonoBehaviour {
         } else {
             feedDragon ();
         }
+
     }
 
     private void feedDragonLikedFood () {
-        hasBeenFedFavoriteFoodOnce = true;
-        patienceMeter += patienceIncreaseBonus;
-        hungerMeter += hungerIncreaseFavoriteFoodBonus;
+        paitenceMeter += paienceIncreaseBonus;
+        hungerMeter += hungerIncreaseAmount;
+        internalMoodSetting = 2.0F;
     }
 
     private void feedDragon () {
-        hungerMeter += hungerIncreaseWhenFed;
+        hungerMeter += hungerIncreaseAmount;
+        internalMoodSetting = 1.0F;
     }
 
     private void feedDragonDislikedFood () {
-        patienceMeter -= patienceIncreaseBonus;
-        hungerMeter += hungerIncreaseWhenFed;
-    }
-
-    public int CaluclateFinalScore () {
-        int startScore = 10;
-
-        if (hasBeenPetOnce) {
-            startScore += 5;
-        }
-
-        if (hasBeenFedFavoriteFoodOnce) {
-            startScore += 5;
-        }
-
-        return startScore;
-    }
-
-    public void ResetDragon () {
-        if (heartsParticleEffect != null && hungrySlider != null) {
-            hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
-            coldParticleEffect.GetComponent<ParticleSystem> ().Stop ();
-            heartsParticleEffect.GetComponent<ParticleSystem> ().Stop ();
-
-            patienceMeter = 0;
-            patientTimer.value = 0;
-            patientTimer.maxValue = 1.0f;
-
-            hungerMeter = 0.5F;
-            hungrySlider.value = 0.5F;
-            hungrySlider.maxValue = 1.0f;
-
-            hotIcon.enabled = false;
-            coldIcon.enabled = false;
-            happyIcon.enabled = false;
-            sadIcon.enabled = false;
-            sickIcon.enabled = false;
-
-            hasBeenPetOnce = false;
-            hasPooped = false;
-            cleanedUpPoop = false;
-            hasGottenAStatusAilment = false;
-
-            hasBeenFedFavoriteFoodOnce = false;
-        } else {
-            Debug.Log ("Null values on reset dragon");
-        }
-
+        paitenceMeter -= paienceIncreaseBonus;
+        hungerMeter += hungerIncreaseAmount;
+        internalMoodSetting = 0.5F;
     }
 }

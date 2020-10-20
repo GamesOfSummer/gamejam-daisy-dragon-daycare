@@ -77,6 +77,10 @@ public class GameController : MonoBehaviour {
     public GameObject presentBtn, newPresentBtn;
     public Image present1, present2, present3;
 
+    //Sound Effects
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     private int finalScore = 0;
 
     private void Awake () {
@@ -107,6 +111,10 @@ public class GameController : MonoBehaviour {
             StartCoroutine (SpawnDragonsWhileGameIsRunning (3.0f));
         }
     }
+public void playClip(){
+audioSource.clip = audioClip;
+audioSource.Play();
+}
 
     public void TurnOnReleaseButton () {
         releaseDragonButton.SetActive (true);
@@ -183,7 +191,7 @@ public class GameController : MonoBehaviour {
         SpawnPointsTracker location = getRandomDragonSpawnLocation ();
         var dragon = _pool.spawnObject (dragonPrefab, location.SpawnHere, Quaternion.identity);
         dragon.GetComponent<Dragon> ().dragonId = location.dragonId;
-        dragon.GetComponent<Dragon> ().ResetDragon ();
+        //dragon.GetComponent<Dragon> ().ResetDragon ();
     }
 
     public void ReleaseDragon () {
@@ -193,7 +201,7 @@ public class GameController : MonoBehaviour {
             Debug.Log ("Releasing dragon");
 
             var id = dragon.GetComponent<Dragon> ().dragonId;
-            IncrementFinalScore (dragon.GetComponent<Dragon> ().CaluclateFinalScore ());
+            //IncrementFinalScore (dragon.GetComponent<Dragon> ().CaluclateFinalScore ());
 
             foreach (SpawnPointsTracker s in spawnPointTrackers) {
                 if (s.dragonId == id) {

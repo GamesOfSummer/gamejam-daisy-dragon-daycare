@@ -293,20 +293,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerDepletionSpeed: 0.0128
-  hungerIncreaseWhenFed: 0.5
-  hungerIncreaseFavoriteFoodBonus: 0.05
-  patienceIncreaseBonus: 0.0126
+  hungerIncreaseAmount: 70
+  paienceIncreaseBonus: 15
+  paienceDepletionSpeed: 15
   patienceIncreaseSpeed: 0.0286
   chanceToGetAStatusAilment: 0
   dragonId: 
+  audioSource: {fileID: 8273992705543739306, guid: 6c10e8dbc8f8bee4399d58d119d6e273,
+    type: 3}
+  sfxChip1: {fileID: 8300000, guid: 16b67bdd87bee1344ada07c2c41f1e68, type: 3}
+  sfxChirp2: {fileID: 8300000, guid: 3f1899aa4f1a98148ab60f6ff3d4d66e, type: 3}
+  sfxHungry: {fileID: 8300000, guid: 5f2adfd073d92b842bb3541b68874e6a, type: 3}
+  sfxPleased: {fileID: 8300000, guid: 5b679b5a744df414e95bcc1bf1d987fc, type: 3}
+  sfxNotPleased: {fileID: 8300000, guid: ac5d9daa8bb9409459d006e410a553c9, type: 3}
+  sfxSnore: {fileID: 8300000, guid: ca73df005bb0b054bab9fcb2a9393016, type: 3}
   poop: {fileID: 6469355263136289459, guid: 483a3ffe983c3ad4db2aad6f023505fe, type: 3}
+  prefferedPettingSpot: {fileID: 0}
   likedFood: 0
   dislikedFood: 3
-  heartsParticleEffect: {fileID: 4217859309335714135}
-  hotParticleEffect: {fileID: 2969799466375013817}
-  coldParticleEffect: {fileID: 6250779442342586174}
+  hotIcon: {fileID: 0}
+  coldIcon: {fileID: 0}
+  sickIcon: {fileID: 0}
+  happyIcon: {fileID: 0}
+  sadIcon: {fileID: 0}
+  hungrySlider: {fileID: 0}
+  patientTimer: {fileID: 0}
+  particle: {fileID: 0}
   hungerMeter: 1
-  patienceMeter: 0
+  paitenceMeter: 0
 --- !u!1001 &2343301358557173237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -381,12 +395,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8352cad0ee9054a0b9320df1e8300fd8, type: 3}
---- !u!1 &4217859309335714135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1877381582620855458, guid: 8352cad0ee9054a0b9320df1e8300fd8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2343301358557173237}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6091664137579757781 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8362309749975291168, guid: 8352cad0ee9054a0b9320df1e8300fd8,
@@ -462,12 +470,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 209305f0f9b7348218e7fd717623c128, type: 3}
---- !u!1 &2969799466375013817 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1877381582620855458, guid: 209305f0f9b7348218e7fd717623c128,
-    type: 3}
-  m_PrefabInstance: {fileID: 3691566838150818075}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5131834262685187131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8362309749975291168, guid: 209305f0f9b7348218e7fd717623c128,
@@ -543,12 +545,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab134d6a895b64fecac68647ad0a5c07, type: 3}
---- !u!1 &6250779442342586174 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1877381582620855458, guid: ab134d6a895b64fecac68647ad0a5c07,
-    type: 3}
-  m_PrefabInstance: {fileID: 5526750527567621020}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4088725556861796028 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8362309749975291168, guid: ab134d6a895b64fecac68647ad0a5c07,
