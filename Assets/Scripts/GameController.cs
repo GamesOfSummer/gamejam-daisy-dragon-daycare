@@ -73,10 +73,11 @@ public class GameController : MonoBehaviour {
 
     //Present Drop System Variables
     public float presentDropChance = 25f;
-    public GameObject [] presentPool;
+    public GameObject[] presentPool;
     public GameObject presentBtn, newPresentBtn;
     public Image present1, present2, present3;
 
+    private int finalScore = 0;
 
     private void Awake () {
 
@@ -115,49 +116,47 @@ public class GameController : MonoBehaviour {
         releaseDragonButton.SetActive (false);
     }
 
-    public void ShouldPresentDrop (){
-        
-            //drop present
-                float dropChance = Random.Range(0f,100f);
-                Debug.Log("Is " + dropChance + " < " + presentDropChance + "?");
+    public void ShouldPresentDrop () {
 
-                if(dropChance < presentDropChance)
-                {
-                    Debug.Log("Present Dropped!");
-                    int randomItem = Random.Range(0, presentPool.Length);
-                    Debug.Log(randomItem);
-                    presentBtn.SetActive(false);
-                    newPresentBtn.SetActive(true);
+        //drop present
+        float dropChance = Random.Range (0f, 100f);
+        Debug.Log ("Is " + dropChance + " < " + presentDropChance + "?");
 
-                switch(randomItem)
-        {
+        if (dropChance < presentDropChance) {
+            Debug.Log ("Present Dropped!");
+            int randomItem = Random.Range (0, presentPool.Length);
+            Debug.Log (randomItem);
+            presentBtn.SetActive (false);
+            newPresentBtn.SetActive (true);
+
+            switch (randomItem) {
                 case 0:
-                present1.color = new Color(present1.color.r,present1.color.g,present1.color.b,1f);
-                Debug.Log(presentPool[randomItem] + " Item 0");
+                    present1.color = new Color (present1.color.r, present1.color.g, present1.color.b, 1f);
+                    Debug.Log (presentPool[randomItem] + " Item 0");
 
-                break;
+                    break;
 
                 case 1:
-                present2.color = new Color(present2.color.r,present2.color.g,present2.color.b,1f);
-                Debug.Log(presentPool[randomItem] + " Item 1");
-                break;
+                    present2.color = new Color (present2.color.r, present2.color.g, present2.color.b, 1f);
+                    Debug.Log (presentPool[randomItem] + " Item 1");
+                    break;
 
                 case 2:
-                present3.color = new Color(present3.color.r,present3.color.g,present3.color.b,1f);
-                Debug.Log(presentPool[randomItem] + " Item 2");
-                break;
-        }
+                    present3.color = new Color (present3.color.r, present3.color.g, present3.color.b, 1f);
+                    Debug.Log (presentPool[randomItem] + " Item 2");
+                    break;
+            }
 
-                    //Instantiate(presentPool[randomItem], transform.position, transform.rotation);
-                } else {
-                    Debug.Log("Sorry no present this time =/");
-                }
+            //Instantiate(presentPool[randomItem], transform.position, transform.rotation);
+        } else {
+            Debug.Log ("Sorry no present this time =/");
+        }
 
     }
 
-    public void clearNewPresentIdicator(){
-                            newPresentBtn.SetActive(false);
-                            presentBtn.SetActive(true);
+    public void clearNewPresentIdicator () {
+        newPresentBtn.SetActive (false);
+        presentBtn.SetActive (true);
     }
 
     private IEnumerator SpawnDragonsWhileGameIsRunning (float waitTime) {
@@ -194,6 +193,7 @@ public class GameController : MonoBehaviour {
             Debug.Log ("Releasing dragon");
 
             var id = dragon.GetComponent<Dragon> ().dragonId;
+            IncrementFinalScore (dragon.GetComponent<Dragon> ().CaluclateFinalScore ());
 
             foreach (SpawnPointsTracker s in spawnPointTrackers) {
                 if (s.dragonId == id) {
@@ -285,6 +285,14 @@ public class GameController : MonoBehaviour {
         var fruit = _pool.spawnObject (prefab, _player.transform.position + new Vector3 (0, 0, 1.0F), Quaternion.identity);
     }
 
+    public void IncrementFinalScore (int value) {
+        finalScore += value;
+    }
+
+    public int GetFinalScore () {
+        return finalScore;
+    }
+
     public void ToggleGameplayUI () {
         titleScreenUI.SetActive (false);
         gameScreenUI.SetActive (true);
@@ -295,6 +303,7 @@ public class GameController : MonoBehaviour {
         titleScreenUI.SetActive (false);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (true);
+        endScreenUI.GetComponentInChildren<Text> ().text = "That's for dragon-sitting! Final Score - " + GetFinalScore ().ToString ();
     }
 
     public GameObject SpawnObject (GameObject obj) {
@@ -304,5 +313,4 @@ public class GameController : MonoBehaviour {
     public void ReleaseObject (GameObject obj) {
         _pool.releaseObject (obj);
     }
-
 }
