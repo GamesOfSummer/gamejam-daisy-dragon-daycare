@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2087433504557567214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5469858, y: -0.8267329, z: 4.07424}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000002, y: 1, z: 1.0000002}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,10 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   round:
     rounds:
-    - roundName: '** 2 Koi'
+    - roundName: '** 1 Berry Dragon - Easy'
       DragonsToSpawn:
-      - {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a, type: 3}
-      TimeToLastInSeconds: 0
+      - {fileID: 6269631408664805780, guid: b131608d97d601043a9893fa0bb1a1e6, type: 3}
   titleScreenUI: {fileID: 0}
   gameScreenUI: {fileID: 0}
   endScreenUI: {fileID: 0}
@@ -59,6 +58,17 @@ MonoBehaviour:
     type: 3}
   yellowFruit: {fileID: 4197952399141807276, guid: 580fa9f904088364cae2e15b65cd6cdf,
     type: 3}
+  mouseHandImage: {fileID: 0}
+  presentDropChance: 75
+  presentPool:
+  - {fileID: 8144619689502701082, guid: f128b93a4e707dd48857733b9b0c17d9, type: 3}
+  - {fileID: 6328060758150977155, guid: a0f28270d01c4054aaa956b08a5cfb93, type: 3}
+  - {fileID: 2741737985617495526, guid: 3e1d16fbdff689d4d8bdbadce13e0bde, type: 3}
+  presentBtn: {fileID: 0}
+  newPresentBtn: {fileID: 0}
+  present1: {fileID: 0}
+  present2: {fileID: 0}
+  present3: {fileID: 0}
 --- !u!114 &2087433504557567187
 MonoBehaviour:
   m_ObjectHideFlags: 0

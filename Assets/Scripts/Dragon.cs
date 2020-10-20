@@ -183,7 +183,9 @@ public class Dragon : MonoBehaviour {
 
             if (Random.Range (0.0F, 1.0F) < chanceToGetAStatusAilment) {
                 hasGottenAStatusAilment = true;
-                Debug.Log ("SICK");
+                sickIcon.enabled = true;
+                happyIcon.enabled = false;
+                sadIcon.enabled = false;
 
                 if (Random.Range (0, 5) < 2) {
                     status = StatusAilment.Hot;
@@ -197,11 +199,12 @@ public class Dragon : MonoBehaviour {
                 }
             }
         }
-
     }
 
     public void HealDragon () {
         status = StatusAilment.None;
+        sickIcon.enabled = false;
+
         hotIcon.enabled = false;
         hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
         coldIcon.enabled = false;

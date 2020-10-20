@@ -303,7 +303,7 @@ public class GameController : MonoBehaviour {
         titleScreenUI.SetActive (false);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (true);
-        endScreenUI.GetComponentInChildren<Text> ().text = "That's for dragon-sitting! Final Score - " + GetFinalScore ().ToString ();
+        endScreenUI.GetComponentInChildren<Text> ().text = "Thanks for dragon-sitting! Final Score - " + GetFinalScore ().ToString ();
     }
 
     public GameObject SpawnObject (GameObject obj) {
