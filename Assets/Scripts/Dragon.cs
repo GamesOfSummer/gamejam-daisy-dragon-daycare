@@ -306,6 +306,20 @@ public class Dragon : MonoBehaviour {
         hungerMeter += hungerIncreaseWhenFed;
     }
 
+    public int CaluclateFinalScore () {
+        int startScore = 10;
+
+        if (hasBeenPetOnce) {
+            startScore += 5;
+        }
+
+        if (hasBeenFedFavoriteFoodOnce) {
+            startScore += 5;
+        }
+
+        return startScore;
+    }
+
     public void ResetDragon () {
         if (heartsParticleEffect != null && hungrySlider != null) {
             hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
