@@ -1,6 +1,6 @@
-///public enum StatusAilment {
-   /// None,
-    ///Hot,
-    ///Cold,
-    ///Sick
-//}
+public enum StatusAilment {
+    None,
+    Hot,
+    Cold,
+    Sick
+}

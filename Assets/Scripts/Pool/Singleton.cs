@@ -50,9 +50,9 @@ namespace PKG
 
 							//DontDestroyOnLoad(singleton);
 
-							Debug.Log("[Singleton] An instance of " + typeof(T) + 
-								" is needed in the scene, so '" + singleton +
-								"' was created with DontDestroyOnLoad.");
+//							Debug.Log("[Singleton] An instance of " + typeof(T) + 
+//								" is needed in the scene, so '" + singleton +
+//								"' was created with DontDestroyOnLoad.");
 						} else
 						{
 							/*

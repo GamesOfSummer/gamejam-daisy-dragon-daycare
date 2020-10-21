@@ -77,10 +77,6 @@ public class GameController : MonoBehaviour {
     public GameObject presentBtn, newPresentBtn;
     public Image present1, present2, present3;
 
-    //Sound Effects
-    public AudioSource audioSource;
-    public AudioClip audioClip;
-
     private int finalScore = 0;
 
     private void Awake () {
@@ -110,11 +106,8 @@ public class GameController : MonoBehaviour {
             ToggleGameplayUI ();
             StartCoroutine (SpawnDragonsWhileGameIsRunning (3.0f));
         }
+       
     }
-public void playClip(){
-audioSource.clip = audioClip;
-audioSource.Play();
-}
 
     public void TurnOnReleaseButton () {
         releaseDragonButton.SetActive (true);
@@ -128,30 +121,30 @@ audioSource.Play();
 
         //drop present
         float dropChance = Random.Range (0f, 100f);
-        Debug.Log ("Is " + dropChance + " < " + presentDropChance + "?");
+//        Debug.Log ("Is " + dropChance + " < " + presentDropChance + "?");
 
         if (dropChance < presentDropChance) {
-            Debug.Log ("Present Dropped!");
+//            Debug.Log ("Present Dropped!");
             int randomItem = Random.Range (0, presentPool.Length);
-            Debug.Log (randomItem);
+//            Debug.Log (randomItem);
             presentBtn.SetActive (false);
             newPresentBtn.SetActive (true);
 
             switch (randomItem) {
                 case 0:
                     present1.color = new Color (present1.color.r, present1.color.g, present1.color.b, 1f);
-                    Debug.Log (presentPool[randomItem] + " Item 0");
+//                    Debug.Log (presentPool[randomItem] + " Item 0");
 
                     break;
 
                 case 1:
                     present2.color = new Color (present2.color.r, present2.color.g, present2.color.b, 1f);
-                    Debug.Log (presentPool[randomItem] + " Item 1");
+                 //   Debug.Log (presentPool[randomItem] + " Item 1");
                     break;
 
                 case 2:
                     present3.color = new Color (present3.color.r, present3.color.g, present3.color.b, 1f);
-                    Debug.Log (presentPool[randomItem] + " Item 2");
+               //     Debug.Log (presentPool[randomItem] + " Item 2");
                     break;
             }
 
@@ -172,7 +165,7 @@ audioSource.Play();
         yield return new WaitForSeconds (2.0F);
         int counter = 1;
         foreach (Round round in round.rounds) {
-            Debug.Log (counter + " - Spawning dragons - > " + round.roundName);
+//            Debug.Log (counter + " - Spawning dragons - > " + round.roundName);
 
             while (GameObject.FindGameObjectsWithTag ("Dragon").Length != 0) {
                 yield return new WaitForSeconds (2.0F);
@@ -190,18 +183,21 @@ audioSource.Play();
     private void SpawnDragon (GameObject dragonPrefab) {
         SpawnPointsTracker location = getRandomDragonSpawnLocation ();
         var dragon = _pool.spawnObject (dragonPrefab, location.SpawnHere, Quaternion.identity);
+        //Debug.Log("This dragon is a " + dragon);
+        //StartCoroutine(Dragon.instance.DragonSFX());
+
         dragon.GetComponent<Dragon> ().dragonId = location.dragonId;
-        //dragon.GetComponent<Dragon> ().ResetDragon ();
+        dragon.GetComponent<Dragon> ().ResetDragon ();
     }
 
     public void ReleaseDragon () {
         var dragon = _player.GetComponent<PlayerController> ().GetCurrentDragon ();
 
         if (dragon != null) {
-            Debug.Log ("Releasing dragon");
+//            Debug.Log ("Releasing dragon");
 
             var id = dragon.GetComponent<Dragon> ().dragonId;
-            //IncrementFinalScore (dragon.GetComponent<Dragon> ().CaluclateFinalScore ());
+            IncrementFinalScore (dragon.GetComponent<Dragon> ().CaluclateFinalScore ());
 
             foreach (SpawnPointsTracker s in spawnPointTrackers) {
                 if (s.dragonId == id) {
@@ -273,19 +269,19 @@ audioSource.Play();
 
     public void ClickRedFoodButton () {
 
-        Debug.Log ("clicked");
+//        Debug.Log ("clicked");
         spawnFruit (redFruit);
     }
 
     public void ClickBlueFoodButton () {
 
-        Debug.Log ("clicked");
+   //     Debug.Log ("clicked");
         spawnFruit (blueFruit);
     }
 
     public void ClickYellowFoodButton () {
 
-        Debug.Log ("clicked");
+//        Debug.Log ("clicked");
         spawnFruit (yellowFruit);
     }
 
@@ -321,4 +317,5 @@ audioSource.Play();
     public void ReleaseObject (GameObject obj) {
         _pool.releaseObject (obj);
     }
+
 }
