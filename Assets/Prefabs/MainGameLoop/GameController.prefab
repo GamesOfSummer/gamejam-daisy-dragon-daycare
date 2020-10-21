@@ -48,6 +48,19 @@ MonoBehaviour:
     rounds:
     - roundName: '** 1 Berry Dragon - Easy'
       DragonsToSpawn:
+      - {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a, type: 3}
+    - roundName: '** 1 Berry Dragon, 1 Moth'
+      DragonsToSpawn:
+      - {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a, type: 3}
+      - {fileID: 6269631408664805780, guid: b131608d97d601043a9893fa0bb1a1e6, type: 3}
+    - roundName: '** Koi Dragons'
+      DragonsToSpawn:
+      - {fileID: 6269631408664805780, guid: 91c628051aa40ee4f858518c4748f94f, type: 3}
+      - {fileID: 6269631408664805780, guid: 91c628051aa40ee4f858518c4748f94f, type: 3}
+    - roundName: '** Big Grumpy Family'
+      DragonsToSpawn:
+      - {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a, type: 3}
+      - {fileID: 6269631408664805780, guid: 91c628051aa40ee4f858518c4748f94f, type: 3}
       - {fileID: 6269631408664805780, guid: b131608d97d601043a9893fa0bb1a1e6, type: 3}
   titleScreenUI: {fileID: 0}
   gameScreenUI: {fileID: 0}
