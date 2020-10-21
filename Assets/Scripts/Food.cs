@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum FoodType {
-    RedFruit,
-    YellowFruit,
-    BlueFruit,
-
+    Pepper,
+    Pizza,
+    Berries,
     None,
 }
 
@@ -23,22 +20,6 @@ public class Food : MonoBehaviour {
         startPosition = transform.position;
 
         Destroy (this.gameObject, 5.0F);
-    }
-
-    private void Update () {
-
-        if (attachedToPlayer) {
-
-        }
-
-        if (Input.GetMouseButton (1) || (Input.GetButton ("Fire1"))) {
-
-            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-            transform.position = ray.GetPoint (1);
-
-            //Debug.Log (ray + "-----" + transform.position);
-        }
-
     }
 
 }
