@@ -283,6 +283,7 @@ public class GameController : MonoBehaviour {
 
     private void spawnFruit (GameObject prefab) {
         var fruit = _pool.spawnObject (prefab, _player.transform.position + new Vector3 (0, 0, 1.0F), Quaternion.identity);
+        fruit.GetComponent<Rigidbody> ().AddForce (Camera.main.transform.forward * Random.Range (4.0F, 6.0F), ForceMode.Impulse);
     }
 
     public void IncrementFinalScore (int value) {
