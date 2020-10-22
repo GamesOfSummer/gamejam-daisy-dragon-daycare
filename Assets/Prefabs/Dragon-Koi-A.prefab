@@ -422,11 +422,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67536077637b2c14e94aca55f81458f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerDepletionSpeed: 0.0118
-  hungerIncreaseWhenFed: 0.132
-  hungerIncreaseFavoriteFoodBonus: 0.0118
+  hungerDepletionSpeed: 0.0052
+  hungerIncreaseWhenFed: 0.261
+  hungerIncreaseFavoriteFoodBonus: 0.7
   patienceIncreaseBonus: 0.001
-  patienceIncreaseSpeed: 0.0082
+  patienceIncreaseSpeed: 0.0108
   chanceToGetAStatusAilment: 0.547
   dragonId: 
   sfx:
