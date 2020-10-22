@@ -243,16 +243,21 @@ public class Dragon : MonoBehaviour {
 
         if (status != StatusAilment.None) {
             sickIcon.enabled = true;
+            StartCoroutine (DragonMoodSFX (notPleased));
             //audioSource.PlayOneShot(sfx[chirp2], 1f);
         } else {
             float mood = CalculateMood ();
 
             if (mood < .2F) {
                 sadIcon.enabled = true;
+                StartCoroutine (DragonMoodSFX (notPleased));
+
                 //audioSource.PlayOneShot(sfx[chirp2], 1f);
 
             } else if (mood >.8F) {
                 happyIcon.enabled = true;
+                StartCoroutine (DragonMoodSFX (pleased));
+
                 //StartCoroutine(DragonSFX());
                 //Debug.Log("Dragon is happy! " + sfx[pleased]);
 
@@ -272,6 +277,8 @@ public class Dragon : MonoBehaviour {
         }
 
         if (hungerMeter < .3F) {
+        //StartCoroutine (DragonMoodSFX (hungry));
+
             return 0;
         } else if (hungerMeter >.7F) {
             mood += .5F;
@@ -295,8 +302,12 @@ public class Dragon : MonoBehaviour {
     private void Feed (FoodType type) {
         if (type == likedFood) {
             feedDragonLikedFood ();
+            StartCoroutine (DragonMoodSFX (pleased));
+
         } else if (type == dislikedFood) {
             feedDragonDislikedFood ();
+            StartCoroutine (DragonMoodSFX (notPleased));
+
         } else {
             feedDragon ();
         }
@@ -343,7 +354,7 @@ public class Dragon : MonoBehaviour {
         hungrySlider = canvas.hungrySlider;
         patientTimer = canvas.patientTimer;
         StartCoroutine (ProcessEmotions ());
-        StartCoroutine (DragonSFX ());
+        StartCoroutine (DragonSpawnSFX (chirp1));
     }
 
     public void ResetDragon () {
@@ -383,10 +394,38 @@ public class Dragon : MonoBehaviour {
 
     }
 
-    public IEnumerator DragonSFX () {
-        int timeToWait = (Random.Range (0, 3));
+    public IEnumerator DragonSpawnSFX (int sfxToPlay) {
+        if (gameObject.name == "Dragon-Berry-A(Clone)")
+        {
+        int timeToWait = (0);
         yield return new WaitForSeconds (timeToWait);
-        audioSource.PlayOneShot (sfx[chirp1], 1f);
-        Debug.Log ("Played " + sfx[chirp1] + " after waiting for " + timeToWait + " seconds!");
+        audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
+        Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
+        Debug.Log(gameObject.name);
+        }else if (gameObject.name == "Dragon-Moth-A(Clone)")
+        {
+        float timeToWait = (.6f);
+        yield return new WaitForSeconds (timeToWait);
+        audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
+        Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
+        Debug.Log(gameObject.name);
+        }else if (gameObject.name == "Dragon-Koi-A(Clone)")
+        {
+        float timeToWait = (1.2f);
+        yield return new WaitForSeconds (timeToWait);
+        audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
+        Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
+        Debug.Log(gameObject.name);
+        }
+    }
+
+        public IEnumerator DragonMoodSFX (int sfxToPlay) {
+
+        int timeToWait = (0);
+        yield return new WaitForSeconds (timeToWait);
+        audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
+        Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
+        Debug.Log(gameObject.name);
+        
     }
 }
