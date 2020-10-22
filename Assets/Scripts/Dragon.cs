@@ -28,7 +28,7 @@ public class Dragon : MonoBehaviour {
     public static Dragon instance;
     public AudioClip[] sfx;
     public AudioSource audioSource;
-        //SFX Variables
+    //SFX Variables
     [HideInInspector]
     public int chirp1 = 0;
     [HideInInspector]
@@ -41,7 +41,6 @@ public class Dragon : MonoBehaviour {
     public int pleased = 4;
     [HideInInspector]
     public int snore = 5;
-
 
     [Header ("DO NOT TOUCH BELOW THIS LINE")]
     public GameObject poop;
@@ -79,26 +78,12 @@ public class Dragon : MonoBehaviour {
 
     private StatusAilment status = StatusAilment.None;
 
-    private void Awake()
-    {
+    private void Awake () {
         instance = this;
     }
-        void Start () {
-        var canvas = GetComponentInChildren<CanvasUI> ();
-        //audioSource = Instantiate(audioSource)
-        happyIcon = canvas.happyIcon;
-        sadIcon = canvas.sadIcon;
-        sickIcon = canvas.sickIcon;
-
-        hotIcon = canvas.hotIcon;
-        coldIcon = canvas.coldIcon;
-
-        hungrySlider = canvas.hungrySlider;
-        patientTimer = canvas.patientTimer;
-        //audioSource = GetComponent<AudioSource>();
+    void Start () {
         ResetDragon ();
-        StartCoroutine (ProcessEmotions ());
-        StartCoroutine(DragonSFX());
+        StartDragon ();
     }
 
     void Update () {
@@ -132,11 +117,6 @@ public class Dragon : MonoBehaviour {
         }
     }
 
-    public void DragonSpawnNoise()
-    {
-        //StartCoroutine (DragonSFX());
-    }
-
     private void OnTriggerEnter (Collider other) {
 
         if (other.tag == "Food" && hungerMeter < 1.0F) {
@@ -156,15 +136,9 @@ public class Dragon : MonoBehaviour {
             hasBeenPetOnce = true;
 
             if (!heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
-//                Debug.Log ("play");
                 heartsParticleEffect.GetComponent<ParticleSystem> ().Play ();
                 beingPet = true;
             }
-
-            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-            var holder = ray.GetPoint (1);
-            //Debug.Log (holder);
-            // Debug.Log (Vector3.Distance (prefferedPettingSpot.transform.position, holder));
 
         } else if (heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
             heartsParticleEffect.GetComponent<ParticleSystem> ().Stop ();
@@ -214,7 +188,6 @@ public class Dragon : MonoBehaviour {
                 sickIcon.enabled = true;
                 happyIcon.enabled = false;
                 sadIcon.enabled = false;
-
 
                 if (Random.Range (0, 5) < 2) {
                     status = StatusAilment.Hot;
@@ -358,7 +331,24 @@ public class Dragon : MonoBehaviour {
         return startScore;
     }
 
+    public void StartDragon () {
+        var canvas = GetComponentInChildren<CanvasUI> ();
+        happyIcon = canvas.happyIcon;
+        sadIcon = canvas.sadIcon;
+        sickIcon = canvas.sickIcon;
+
+        hotIcon = canvas.hotIcon;
+        coldIcon = canvas.coldIcon;
+
+        hungrySlider = canvas.hungrySlider;
+        patientTimer = canvas.patientTimer;
+        StartCoroutine (ProcessEmotions ());
+        StartCoroutine (DragonSFX ());
+    }
+
     public void ResetDragon () {
+        StopAllCoroutines ();
+
         if (heartsParticleEffect != null && hungrySlider != null) {
             hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
             coldParticleEffect.GetComponent<ParticleSystem> ().Stop ();
@@ -385,16 +375,15 @@ public class Dragon : MonoBehaviour {
 
             hasBeenFedFavoriteFoodOnce = false;
         } else {
-//            Debug.Log ("Null values on reset dragon");
+            //            Debug.Log ("Null values on reset dragon");
         }
 
     }
 
-        public IEnumerator DragonSFX()
-    {
-        int timeToWait = (Random.Range(0,3));
-        yield return new WaitForSeconds(timeToWait);
-        audioSource.PlayOneShot(sfx[chirp1], 1f);
-        Debug.Log("Played " + sfx[chirp1] + " after waiting for " + timeToWait + " seconds!");       
+    public IEnumerator DragonSFX () {
+        int timeToWait = (Random.Range (0, 3));
+        yield return new WaitForSeconds (timeToWait);
+        audioSource.PlayOneShot (sfx[chirp1], 1f);
+        Debug.Log ("Played " + sfx[chirp1] + " after waiting for " + timeToWait + " seconds!");
     }
 }

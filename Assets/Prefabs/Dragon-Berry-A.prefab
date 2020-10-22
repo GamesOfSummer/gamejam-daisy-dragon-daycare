@@ -96,36 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ease: 0.15
---- !u!1 &4713056677954785647
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7604649391640015444}
-  m_Layer: 0
-  m_Name: PreferredScratchingSpot
-  m_TagString: Untagged
-  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7604649391640015444
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4713056677954785647}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 1.18, z: 0.00042963028}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5568636025664074387}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5619760277751766224
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +125,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5568636025664074387}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2681746168240519556
 AudioSource:
@@ -293,7 +263,6 @@ Transform:
   - {fileID: 5131834262685187131}
   - {fileID: 4088725556861796028}
   - {fileID: 5468777060904907146}
-  - {fileID: 7604649391640015444}
   - {fileID: 4942497362070298198}
   - {fileID: 4610571738611012417}
   m_Father: {fileID: 0}
@@ -426,7 +395,7 @@ MonoBehaviour:
   hungerIncreaseWhenFed: 0.1
   hungerIncreaseFavoriteFoodBonus: 0.1
   patienceIncreaseBonus: 0.001
-  patienceIncreaseSpeed: 0.0286
+  patienceIncreaseSpeed: 0.0326
   chanceToGetAStatusAilment: 0
   dragonId: 
   sfx:
@@ -446,12 +415,9 @@ MonoBehaviour:
   poop: {fileID: 6469355263136289459, guid: 483a3ffe983c3ad4db2aad6f023505fe, type: 3}
   likedFood: 0
   dislikedFood: 3
-  heartsParticleEffect: {fileID: 1877381582620855458, guid: 8352cad0ee9054a0b9320df1e8300fd8,
-    type: 3}
-  hotParticleEffect: {fileID: 1877381582620855458, guid: 209305f0f9b7348218e7fd717623c128,
-    type: 3}
-  coldParticleEffect: {fileID: 1877381582620855458, guid: ab134d6a895b64fecac68647ad0a5c07,
-    type: 3}
+  heartsParticleEffect: {fileID: 4217859309335714135}
+  hotParticleEffect: {fileID: 2969799466375013817}
+  coldParticleEffect: {fileID: 6250779442342586174}
   hungerMeter: 1
   patienceMeter: 0
 --- !u!82 &7383749029432909184
@@ -625,6 +591,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8352cad0ee9054a0b9320df1e8300fd8, type: 3}
+--- !u!1 &4217859309335714135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1877381582620855458, guid: 8352cad0ee9054a0b9320df1e8300fd8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2343301358557173237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6091664137579757781 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8362309749975291168, guid: 8352cad0ee9054a0b9320df1e8300fd8,
@@ -700,6 +672,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 209305f0f9b7348218e7fd717623c128, type: 3}
+--- !u!1 &2969799466375013817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1877381582620855458, guid: 209305f0f9b7348218e7fd717623c128,
+    type: 3}
+  m_PrefabInstance: {fileID: 3691566838150818075}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5131834262685187131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8362309749975291168, guid: 209305f0f9b7348218e7fd717623c128,
@@ -775,6 +753,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab134d6a895b64fecac68647ad0a5c07, type: 3}
+--- !u!1 &6250779442342586174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1877381582620855458, guid: ab134d6a895b64fecac68647ad0a5c07,
+    type: 3}
+  m_PrefabInstance: {fileID: 5526750527567621020}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4088725556861796028 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8362309749975291168, guid: ab134d6a895b64fecac68647ad0a5c07,
@@ -846,7 +830,7 @@ PrefabInstance:
     - target: {fileID: 4514531566674806146, guid: a5ad922bc5829471b847d4a81ce7c1d9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4514531566674806146, guid: a5ad922bc5829471b847d4a81ce7c1d9,
         type: 3}
