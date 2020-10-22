@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour {
 
     public GameObject titleScreenUI;
     public GameObject gameScreenUI;
+    public GameObject tutorialScreenUIPg1, tutorialScreenUIPg2;
 
     public GameObject endScreenUI;
 
@@ -70,6 +71,10 @@ public class GameController : MonoBehaviour {
 
     private GameObject releaseDragonButton;
     private bool allDragonsSpawned = false;
+
+    bool tutorialActive1 = false;
+    bool tutorialActive2 = false;
+    private bool gameInProgress = false;
 
     //Present Drop System Variables
     public float presentDropChance = 25f;
@@ -102,10 +107,55 @@ public class GameController : MonoBehaviour {
     void Update () {
 
         if (GameState.Instance.IsCurrentStateTitle () && Input.GetMouseButton (0)) {
+            if (tutorialActive1 != true && tutorialActive2 != true)
+            {         
+            gameInProgress = true;
             GameState.Instance.ChangeState_Play ();
+            Debug.Log(tutorialActive1 + " " + tutorialActive2);
             ToggleGameplayUI ();
             StartCoroutine (SpawnDragonsWhileGameIsRunning (3.0f));
+            }
         }
+
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            if(gameInProgress != true)
+            {
+            Debug.Log("H key pressed");
+            if(tutorialActive1 == false)
+            {
+            tutorialScreenUIPg1.SetActive (true);
+            tutorialActive1 = true;
+            Time.timeScale = 0f;
+            } else if (tutorialActive1 == true || tutorialActive2 == true)
+            {
+            tutorialScreenUIPg1.SetActive (false);
+            tutorialScreenUIPg2.SetActive (false);
+            tutorialActive1 = false;
+            Time.timeScale = 1f;                
+            }
+        }
+        }
+        if(Input.GetKeyDown(KeyCode.N))
+            {
+                Debug.Log("N key pressed");
+                if(tutorialActive2 == false &&  tutorialActive1 == true)
+                {
+                tutorialScreenUIPg1.SetActive (false);
+                tutorialScreenUIPg2.SetActive (true);
+                tutorialActive2 = true;
+                }
+            }
+
+        if(Input.GetKeyDown(KeyCode.P))
+            {
+                if(tutorialActive2 == true)
+                {
+                tutorialScreenUIPg1.SetActive (true);
+                tutorialScreenUIPg2.SetActive (false);
+                tutorialActive2 = false;
+                }
+            }
 
     }
 
@@ -288,6 +338,7 @@ public class GameController : MonoBehaviour {
         titleScreenUI.SetActive (false);
         gameScreenUI.SetActive (true);
         releaseDragonButton.SetActive (false);
+        gameInProgress = true;
     }
 
     public void ToggleEndUI () {
