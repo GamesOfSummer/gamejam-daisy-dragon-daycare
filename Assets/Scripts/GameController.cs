@@ -260,26 +260,20 @@ public class GameController : MonoBehaviour {
     }
 
     public void ClickRedFoodButton () {
-
-        //        Debug.Log ("clicked");
         spawnFruit (redFruit);
     }
 
     public void ClickBlueFoodButton () {
-
-        //     Debug.Log ("clicked");
         spawnFruit (blueFruit);
     }
 
     public void ClickYellowFoodButton () {
-
-        //        Debug.Log ("clicked");
         spawnFruit (yellowFruit);
     }
 
     private void spawnFruit (GameObject prefab) {
-        var fruit = _pool.spawnObject (prefab, _player.transform.position + new Vector3 (0, 0, 1.0F), Quaternion.identity);
-        fruit.GetComponent<Rigidbody> ().AddForce (Camera.main.transform.forward * Random.Range (4.0F, 6.0F), ForceMode.Impulse);
+        var fruit = _pool.spawnObject (prefab, _player.transform.position + new Vector3 (0, 1.0F, 0.0F), Quaternion.identity);
+        fruit.GetComponent<Rigidbody> ().AddForce (Camera.main.transform.forward * Random.Range (10.0F, 12.0F), ForceMode.Impulse);
     }
 
     public void IncrementFinalScore (int value) {

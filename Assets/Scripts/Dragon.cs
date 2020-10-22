@@ -132,7 +132,7 @@ public class Dragon : MonoBehaviour {
 
     private void OnTriggerStay (Collider other) {
 
-        if (_player != null && Input.GetMouseButton (0)) {
+        if (_player != null && mouseIsCurrentlyOnMe) {
             hasBeenPetOnce = true;
 
             if (!heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
@@ -374,6 +374,9 @@ public class Dragon : MonoBehaviour {
             hasGottenAStatusAilment = false;
 
             hasBeenFedFavoriteFoodOnce = false;
+
+            _player = null;
+            mouseIsCurrentlyOnMe = true;
         } else {
             //            Debug.Log ("Null values on reset dragon");
         }

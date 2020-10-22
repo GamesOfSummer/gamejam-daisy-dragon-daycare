@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4197952399141807267}
   - component: {fileID: 4197952399141807265}
   - component: {fileID: 2217161002671273004}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Food-Pepper
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4197952399315256900}
   - component: {fileID: 4197952399315256923}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
