@@ -35,6 +35,10 @@ public class GameState : MonoBehaviour {
         return fsm.State == States.End;
     }
 
+    public void ChangeState_Start () {
+        fsm.ChangeState (States.TitleScreen);
+    }
+
     public void ChangeState_Play () {
         fsm.ChangeState (States.Play);
     }
