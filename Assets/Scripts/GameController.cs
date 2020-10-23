@@ -89,8 +89,6 @@ public class GameController : MonoBehaviour {
         Instance = this;
 
         releaseDragonButton = GameObject.FindGameObjectWithTag ("ReleaseDragonButton");
-        gameScreenUI.SetActive (false);
-        endScreenUI.SetActive (false);
 
         _player = GameObject.FindGameObjectWithTag ("Player");
         spawnPoints = GameObject.FindGameObjectsWithTag ("Spawn Point");
@@ -102,10 +100,11 @@ public class GameController : MonoBehaviour {
             spawnPointTrackers[i].dragonId = (Random.Range (0, 100) + Random.Range (0, 100) + Random.Range (0, 100)).ToString ();
         }
 
+        StartGameUI ();
+
     }
 
     void Update () {
-
         if (GameState.Instance.IsCurrentStateTitle () && Input.GetMouseButton (0)) {
             if (tutorialActive1 != true && tutorialActive2 != true)
             {         
@@ -157,14 +156,6 @@ public class GameController : MonoBehaviour {
                 }
             }
 
-    }
-
-    public void TurnOnReleaseButton () {
-        releaseDragonButton.SetActive (true);
-    }
-
-    public void TurnOffReleaseButton () {
-        releaseDragonButton.SetActive (false);
     }
 
     public void ShouldPresentDrop () {
@@ -257,6 +248,7 @@ public class GameController : MonoBehaviour {
             if (isGameOver ()) {
                 GameState.Instance.ChangeState_End ();
                 ToggleEndUI ();
+                ResetGameStartCoRoutine ();
             }
 
         } else {
@@ -348,12 +340,44 @@ public class GameController : MonoBehaviour {
         endScreenUI.GetComponentInChildren<Text> ().text = "Thanks for dragon-sitting! Final Score - " + GetFinalScore ().ToString ();
     }
 
+    public void ResetGameStartCoRoutine () {
+        StartCoroutine (ResetGameCoroutine ());
+    }
+
+    private IEnumerator ResetGameCoroutine () {
+        yield return new WaitForSeconds (3.0F);
+        endScreenUI.GetComponentInChildren<Text> ().text = "Resetting game - 3 - try again!";
+        yield return new WaitForSeconds (1.0F);
+        endScreenUI.GetComponentInChildren<Text> ().text = "Resetting game - 2 - try again!";
+        yield return new WaitForSeconds (1.0F);
+        endScreenUI.GetComponentInChildren<Text> ().text = "Resetting game - 1 - try again!";
+        yield return new WaitForSeconds (1.0F);
+
+        GameState.Instance.ChangeState_Start ();
+        StartGameUI ();
+    }
+
+    private void StartGameUI () {
+        titleScreenUI.SetActive (true);
+        gameScreenUI.SetActive (false);
+        endScreenUI.SetActive (false);
+        releaseDragonButton.SetActive (false);
+    }
+
     public GameObject SpawnObject (GameObject obj) {
         return _pool.spawnObject (obj, new Vector3 (0, 0, 0), Quaternion.identity);
     }
 
     public void ReleaseObject (GameObject obj) {
         _pool.releaseObject (obj);
+    }
+
+    public void TurnOnReleaseButton () {
+        releaseDragonButton.SetActive (true);
+    }
+
+    public void TurnOffReleaseButton () {
+        releaseDragonButton.SetActive (false);
     }
 
 }
