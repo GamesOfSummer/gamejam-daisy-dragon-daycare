@@ -61,15 +61,15 @@ public class GameController : MonoBehaviour {
 
     private PoolManager _pool { get { return PoolManager.Instance; } }
 
-    public GameObject redFruit;
-    public GameObject blueFruit;
-    public GameObject yellowFruit;
+    public GameObject pizzaFood;
+    public GameObject pepperFood;
+    public GameObject berriesFood;
 
     public Texture2D mouseHandImage;
 
     private GameObject _player;
 
-    private GameObject releaseDragonButton;
+    public GameObject releaseDragonButton;
     private bool allDragonsSpawned = false;
 
     bool tutorialActive1 = false;
@@ -86,7 +86,6 @@ public class GameController : MonoBehaviour {
 
     private void Awake () {
         Instance = this;
-        releaseDragonButton = GameObject.FindGameObjectWithTag ("ReleaseDragonButton");
 
         _player = GameObject.FindGameObjectWithTag ("Player");
         spawnPoints = GameObject.FindGameObjectsWithTag ("Spawn Point");
@@ -218,7 +217,7 @@ public class GameController : MonoBehaviour {
     public void ReleaseDragon () {
         var dragon = _player.GetComponent<PlayerController> ().GetCurrentDragon ();
 
-        if (dragon != null) {
+        if (dragon != null && dragon.GetComponent<Dragon> ().canBeReleased ()) {
 
             var id = dragon.GetComponent<Dragon> ().dragonId;
             IncrementFinalScore (dragon.GetComponent<Dragon> ().CaluclateFinalScore ());
@@ -238,11 +237,9 @@ public class GameController : MonoBehaviour {
                 ToggleEndUI ();
                 ResetGameStartCoRoutine ();
             }
-
         } else {
             Debug.Log ("No dragon to release");
         }
-
     }
 
     public void CleanupPoop () {
@@ -289,16 +286,16 @@ public class GameController : MonoBehaviour {
         return new SpawnPoint () { SpawnHere = point };
     }
 
-    public void ClickRedFoodButton () {
-        spawnFruit (redFruit);
+    public void ClickPizzaButton () {
+        spawnFruit (pizzaFood);
     }
 
-    public void ClickBlueFoodButton () {
-        spawnFruit (blueFruit);
+    public void ClickPepperButton () {
+        spawnFruit (pepperFood);
     }
 
-    public void ClickYellowFoodButton () {
-        spawnFruit (yellowFruit);
+    public void ClickBerryButton () {
+        spawnFruit (berriesFood);
     }
 
     private void spawnFruit (GameObject prefab) {
@@ -317,7 +314,7 @@ public class GameController : MonoBehaviour {
     public void ToggleGameplayUI () {
         titleScreenUI.SetActive (false);
         gameScreenUI.SetActive (true);
-        releaseDragonButton.SetActive (false);
+        TurnOffReleaseButton ();
         gameInProgress = true;
     }
 
@@ -347,7 +344,6 @@ public class GameController : MonoBehaviour {
 
     private void StartGameUI () {
 
-
         tutorialScreenUIPg1.SetActive (false);
         tutorialScreenUIPg2.SetActive (false);
         tutorialActive1 = false;
@@ -357,6 +353,7 @@ public class GameController : MonoBehaviour {
         titleScreenUI.SetActive (true);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
+
       
 
         titleScreenUI.SetActive (true);
@@ -369,6 +366,9 @@ public class GameController : MonoBehaviour {
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
     
+
+
+        TurnOffReleaseButton ();
 
     }
 
@@ -388,4 +388,7 @@ public class GameController : MonoBehaviour {
         releaseDragonButton.SetActive (false);
     }
 
+    public void ResetMouseCursor () {
+        Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
+    }
 }

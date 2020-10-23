@@ -113,7 +113,6 @@ public class Dragon : MonoBehaviour {
             if (fill != null) {
                 fill.color = Color.green;
             }
-
         }
     }
 
@@ -133,6 +132,7 @@ public class Dragon : MonoBehaviour {
     private void OnTriggerStay (Collider other) {
 
         if (_player != null && mouseIsCurrentlyOnMe) {
+            Cursor.SetCursor (GameController.Instance.mouseHandImage, new Vector2 (1, 1), CursorMode.Auto);
             hasBeenPetOnce = true;
 
             if (!heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
@@ -148,16 +148,14 @@ public class Dragon : MonoBehaviour {
     private void OnTriggerExit (Collider other) {
         beingPet = false;
         _player = null;
+        Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
     }
 
     void OnMouseEnter () {
-        //Debug.Log ("enter");
         mouseIsCurrentlyOnMe = true;
-        Cursor.SetCursor (GameController.Instance.mouseHandImage, Vector2.zero, CursorMode.Auto);
     }
 
     void OnMouseExit () {
-        //Debug.Log ("exit");
         mouseIsCurrentlyOnMe = false;
         Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
     }
@@ -218,7 +216,6 @@ public class Dragon : MonoBehaviour {
 
     GameObject poopObj;
     private void Poop () {
-
         if (hungerMeter >.6F && !hasPooped) {
             hasPooped = true;
             poopObj = GameController.Instance.SpawnObject (poop);
@@ -244,7 +241,6 @@ public class Dragon : MonoBehaviour {
         if (status != StatusAilment.None) {
             sickIcon.enabled = true;
             StartCoroutine (DragonMoodSFX (notPleased));
-            //audioSource.PlayOneShot(sfx[chirp2], 1f);
         } else {
             float mood = CalculateMood ();
 
@@ -252,15 +248,9 @@ public class Dragon : MonoBehaviour {
                 sadIcon.enabled = true;
                 StartCoroutine (DragonMoodSFX (notPleased));
 
-                //audioSource.PlayOneShot(sfx[chirp2], 1f);
-
             } else if (mood >.8F) {
                 happyIcon.enabled = true;
                 StartCoroutine (DragonMoodSFX (pleased));
-
-                //StartCoroutine(DragonSFX());
-                //Debug.Log("Dragon is happy! " + sfx[pleased]);
-
             }
         }
 
@@ -277,8 +267,6 @@ public class Dragon : MonoBehaviour {
         }
 
         if (hungerMeter < .3F) {
-        //StartCoroutine (DragonMoodSFX (hungry));
-
             return 0;
         } else if (hungerMeter >.7F) {
             mood += .5F;
@@ -373,6 +361,18 @@ public class Dragon : MonoBehaviour {
             hungrySlider.value = 0.5F;
             hungrySlider.maxValue = 1.0f;
 
+            var fill = hungrySlider.GetComponentsInChildren<UnityEngine.UI.Image> ()
+                .FirstOrDefault (t => t.name == "Fill");
+            if (fill != null) {
+                fill.color = Color.red;
+            }
+
+            fill = patientTimer.GetComponentsInChildren<UnityEngine.UI.Image> ()
+                .FirstOrDefault (t => t.name == "Fill");
+            if (fill != null) {
+                fill.color = Color.blue;
+            }
+
             hotIcon.enabled = false;
             coldIcon.enabled = false;
             happyIcon.enabled = false;
@@ -387,7 +387,9 @@ public class Dragon : MonoBehaviour {
             hasBeenFedFavoriteFoodOnce = false;
 
             _player = null;
-            mouseIsCurrentlyOnMe = true;
+            mouseIsCurrentlyOnMe = false;
+
+            GameController.Instance.TurnOffReleaseButton ();
         } else {
             //            Debug.Log ("Null values on reset dragon");
         }
@@ -395,37 +397,34 @@ public class Dragon : MonoBehaviour {
     }
 
     public IEnumerator DragonSpawnSFX (int sfxToPlay) {
-        if (gameObject.name == "Dragon-Berry-A(Clone)")
-        {
-        int timeToWait = (0);
-        yield return new WaitForSeconds (timeToWait);
-        audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
-        Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
-        Debug.Log(gameObject.name);
-        }else if (gameObject.name == "Dragon-Moth-A(Clone)")
-        {
-        float timeToWait = (.6f);
-        yield return new WaitForSeconds (timeToWait);
-        audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
-        Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
-        Debug.Log(gameObject.name);
-        }else if (gameObject.name == "Dragon-Koi-A(Clone)")
-        {
-        float timeToWait = (1.2f);
-        yield return new WaitForSeconds (timeToWait);
-        audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
-        Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
-        Debug.Log(gameObject.name);
+        if (gameObject.name == "Dragon-Berry-A(Clone)") {
+            int timeToWait = (0);
+            yield return new WaitForSeconds (timeToWait);
+            audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
+            Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
+            Debug.Log (gameObject.name);
+        } else if (gameObject.name == "Dragon-Moth-A(Clone)") {
+            float timeToWait = (.6f);
+            yield return new WaitForSeconds (timeToWait);
+            audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
+            Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
+            Debug.Log (gameObject.name);
+        } else if (gameObject.name == "Dragon-Koi-A(Clone)") {
+            float timeToWait = (1.2f);
+            yield return new WaitForSeconds (timeToWait);
+            audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
+            Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
+            Debug.Log (gameObject.name);
         }
     }
 
-        public IEnumerator DragonMoodSFX (int sfxToPlay) {
+    public IEnumerator DragonMoodSFX (int sfxToPlay) {
 
         int timeToWait = (0);
         yield return new WaitForSeconds (timeToWait);
         audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
         Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
-        Debug.Log(gameObject.name);
-        
+        Debug.Log (gameObject.name);
+
     }
 }
