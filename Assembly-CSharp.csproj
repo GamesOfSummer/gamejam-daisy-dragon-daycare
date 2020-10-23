@@ -56,8 +56,9 @@
      <Compile Include="Assets\Scripts\AudioTest.cs" />
      <Compile Include="Assets\Scripts\CanvasUI.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />
-     <Compile Include="Assets\Scripts\FaceCamera.cs" />
      <Compile Include="Assets\Art\AllSkyFree\AllSkyFree_Menu.cs" />
+     <Compile Include="Assets\Scripts\FaceCamera.cs" />
+     <Compile Include="Assets\Scripts\ResetMouseCursor.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
