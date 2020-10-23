@@ -132,7 +132,16 @@ public class Dragon : MonoBehaviour {
     private void OnTriggerStay (Collider other) {
 
         if (_player != null && mouseIsCurrentlyOnMe) {
-            Cursor.SetCursor (GameController.Instance.mouseHandImage, new Vector2 (1, 1), CursorMode.Auto);
+
+            Vector2 screenPosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 worldPosition = Camera.main.ScreenToViewportPoint (screenPosition);
+
+            if (worldPosition.x > 0.3F && worldPosition.x < 0.7F) {
+                Cursor.SetCursor (GameController.Instance.mouseHandImage, new Vector2 (1, 1), CursorMode.Auto);
+            } else {
+                Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
+            }
+
             hasBeenPetOnce = true;
 
             if (!heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
