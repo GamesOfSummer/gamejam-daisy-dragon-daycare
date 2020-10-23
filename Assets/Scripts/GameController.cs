@@ -353,6 +353,7 @@ public class GameController : MonoBehaviour {
         tutorialActive1 = false;
         tutorialActive2 = false;
 
+
         titleScreenUI.SetActive (true);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
@@ -362,6 +363,12 @@ public class GameController : MonoBehaviour {
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
         releaseDragonButton.SetActive (false);
+
+
+        titleScreenUI.SetActive (true);
+        gameScreenUI.SetActive (false);
+        endScreenUI.SetActive (false);
+    
 
     }
 
