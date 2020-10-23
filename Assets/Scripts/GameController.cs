@@ -347,6 +347,7 @@ public class GameController : MonoBehaviour {
 
     private void StartGameUI () {
 
+
         tutorialScreenUIPg1.SetActive (false);
         tutorialScreenUIPg2.SetActive (false);
         tutorialActive1 = false;
@@ -355,12 +356,13 @@ public class GameController : MonoBehaviour {
         titleScreenUI.SetActive (true);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
-        if (releaseDragonButton) {
-            releaseDragonButton.SetActive (false);
-        } else {
-            releaseDragonButton = GameObject.FindGameObjectWithTag ("ReleaseDragonButton");
-            releaseDragonButton.SetActive (false);
-        }
+      
+
+        titleScreenUI.SetActive (true);
+        gameScreenUI.SetActive (false);
+        endScreenUI.SetActive (false);
+        releaseDragonButton.SetActive (false);
+
     }
 
     public GameObject SpawnObject (GameObject obj) {
