@@ -85,9 +85,7 @@ public class GameController : MonoBehaviour {
     private int finalScore = 0;
 
     private void Awake () {
-
         Instance = this;
-
         releaseDragonButton = GameObject.FindGameObjectWithTag ("ReleaseDragonButton");
 
         _player = GameObject.FindGameObjectWithTag ("Player");
@@ -101,7 +99,6 @@ public class GameController : MonoBehaviour {
         }
 
         StartGameUI ();
-
     }
 
     void Update () {
@@ -349,10 +346,21 @@ public class GameController : MonoBehaviour {
     }
 
     private void StartGameUI () {
+
+        tutorialScreenUIPg1.SetActive (false);
+        tutorialScreenUIPg2.SetActive (false);
+        tutorialActive1 = false;
+        tutorialActive2 = false;
+
         titleScreenUI.SetActive (true);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
-        releaseDragonButton.SetActive (false);
+        if (releaseDragonButton) {
+            releaseDragonButton.SetActive (false);
+        } else {
+            releaseDragonButton = GameObject.FindGameObjectWithTag ("ReleaseDragonButton");
+            releaseDragonButton.SetActive (false);
+        }
     }
 
     public GameObject SpawnObject (GameObject obj) {
