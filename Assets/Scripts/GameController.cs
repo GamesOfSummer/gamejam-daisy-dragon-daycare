@@ -37,6 +37,8 @@ public class SpawnPointsTracker {
     public int index;
     public Boolean locked = false;
 
+    public Boolean wasUsedLastRound = false;
+
     public string dragonId;
 
     public Vector3 SpawnHere;
@@ -189,7 +191,7 @@ public class GameController : MonoBehaviour {
     }
 
     private IEnumerator SpawnDragonsWhileGameIsRunning (float waitTime) {
-        yield return new WaitForSeconds (2.0F);
+        yield return new WaitForSeconds (3.0F);
         foreach (Round round in round.rounds) {
 
             while (GameObject.FindGameObjectsWithTag ("Dragon").Length != 0) {
@@ -263,16 +265,23 @@ public class GameController : MonoBehaviour {
     }
 
     private SpawnPointsTracker getRandomDragonSpawnLocation () {
-
         int breakCounter = 0;
         Boolean placed = false;
-        while (!placed && breakCounter < 100) {
+        while (!placed && breakCounter < 200) {
+
+            //reset all the points if they have all been used!
+            if (spawnPointTrackers.All (x => x.wasUsedLastRound == true)) {
+                foreach (SpawnPointsTracker s in spawnPointTrackers) {
+                    s.wasUsedLastRound = false;
+                }
+            };
 
             breakCounter++;
 
             int index = Random.Range (0, spawnPointTrackers.Length - 1);
-            if (!spawnPointTrackers[index].locked) {
+            if (!spawnPointTrackers[index].locked || !spawnPointTrackers[index].wasUsedLastRound) {
                 spawnPointTrackers[index].locked = true;
+                spawnPointTrackers[index].wasUsedLastRound = true;
                 return spawnPointTrackers[index];
             }
 
@@ -349,24 +358,18 @@ public class GameController : MonoBehaviour {
         tutorialActive1 = false;
         tutorialActive2 = false;
 
-
         titleScreenUI.SetActive (true);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
-
-      
 
         titleScreenUI.SetActive (true);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
         releaseDragonButton.SetActive (false);
 
-
         titleScreenUI.SetActive (true);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
-    
-
 
         TurnOffReleaseButton ();
 
