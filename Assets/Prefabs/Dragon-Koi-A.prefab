@@ -412,7 +412,7 @@ MonoBehaviour:
   hungerIncreaseWhenFed: 0.261
   hungerIncreaseFavoriteFoodBonus: 0.7
   patienceIncreaseBonus: 0.05
-  patienceIncreaseSpeed: 0.0237
+  patienceIncreaseSpeed: 0.0261
   chanceToGetAStatusAilment: 1
   dragonId: 
   sfx:
