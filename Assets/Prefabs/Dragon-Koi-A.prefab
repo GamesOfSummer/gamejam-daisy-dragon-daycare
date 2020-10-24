@@ -358,7 +358,7 @@ Animator:
   m_GameObject: {fileID: 6269631408664805780}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8810c4faef35ce44ca3021babee36910, type: 2}
+  m_Controller: {fileID: 9100000, guid: c0114c40dcdf14dc6ac3ca43476f48e3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
   hungerIncreaseWhenFed: 0.261
   hungerIncreaseFavoriteFoodBonus: 0.7
   patienceIncreaseBonus: 0.05
-  patienceIncreaseSpeed: 0.0261
+  patienceIncreaseSpeed: 0.0205
   chanceToGetAStatusAilment: 1
   dragonId: 
   sfx:
@@ -435,8 +435,7 @@ MonoBehaviour:
   heartsParticleEffect: {fileID: 3572782484770739766}
   hotParticleEffect: {fileID: 4117897602823278915}
   coldParticleEffect: {fileID: 690539926989760758}
-  favoriteFoodEffect: {fileID: 3634249937491914351, guid: cbfd3813a15634a299b0765b2a33f9cf,
-    type: 3}
+  favoriteFoodEffect: {fileID: 5901240945522174206}
   hungerMeter: 1
   patienceMeter: 0
 --- !u!82 &2562065542766250867
@@ -998,6 +997,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbfd3813a15634a299b0765b2a33f9cf, type: 3}
+--- !u!1 &5901240945522174206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3634249937491914351, guid: cbfd3813a15634a299b0765b2a33f9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 7172572086654076561}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8083221481345545804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
