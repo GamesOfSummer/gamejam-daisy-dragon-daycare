@@ -264,6 +264,7 @@ Transform:
   - {fileID: 6953754391083016978}
   - {fileID: 8959249695850425129}
   - {fileID: 3443694565965169230}
+  - {fileID: 7472768882702122660}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -403,6 +404,7 @@ MonoBehaviour:
   heartsParticleEffect: {fileID: 1045286142716082832}
   hotParticleEffect: {fileID: 1320837625767719595}
   coldParticleEffect: {fileID: 7777749745548188979}
+  favoriteFoodEffect: {fileID: 5079127955858513942}
   hungerMeter: 1
   patienceMeter: 0
 --- !u!82 &6549510659311196472
@@ -889,4 +891,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8362309749975291168, guid: ab134d6a895b64fecac68647ad0a5c07,
     type: 3}
   m_PrefabInstance: {fileID: 8213952970974482833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8364271817862614649
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5568636025664074387}
+    m_Modifications:
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3634249937491914351, guid: cbfd3813a15634a299b0765b2a33f9cf,
+        type: 3}
+      propertyPath: m_Name
+      value: ParticleEffectBeingFedFavoriteFood
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cbfd3813a15634a299b0765b2a33f9cf, type: 3}
+--- !u!1 &5079127955858513942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3634249937491914351, guid: cbfd3813a15634a299b0765b2a33f9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 8364271817862614649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7472768882702122660 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1416179033305936093, guid: cbfd3813a15634a299b0765b2a33f9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 8364271817862614649}
   m_PrefabAsset: {fileID: 0}

@@ -68,6 +68,8 @@ public class Dragon : MonoBehaviour {
     public GameObject heartsParticleEffect;
     public GameObject hotParticleEffect;
     public GameObject coldParticleEffect;
+
+    public GameObject favoriteFoodEffect;
     [Range (0, 1)]
     public float hungerMeter = 0.5F;
 
@@ -314,6 +316,15 @@ public class Dragon : MonoBehaviour {
         hasBeenFedFavoriteFoodOnce = true;
         patienceMeter += patienceIncreaseBonus;
         hungerMeter += hungerIncreaseFavoriteFoodBonus;
+        StartCoroutine (PlayFavoriteFoodEffect ());
+    }
+
+    private IEnumerator PlayFavoriteFoodEffect () {
+        if (!favoriteFoodEffect.GetComponent<ParticleSystem> ().isPlaying) {
+            favoriteFoodEffect.GetComponent<ParticleSystem> ().Play ();
+            yield return new WaitForSeconds (3.0f);
+            favoriteFoodEffect.GetComponent<ParticleSystem> ().Stop ();
+        }
     }
 
     private void feedDragon () {
@@ -361,6 +372,7 @@ public class Dragon : MonoBehaviour {
             hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
             coldParticleEffect.GetComponent<ParticleSystem> ().Stop ();
             heartsParticleEffect.GetComponent<ParticleSystem> ().Stop ();
+            favoriteFoodEffect.GetComponent<ParticleSystem> ().Stop ();
 
             patienceMeter = 0;
             patientTimer.value = 0;
