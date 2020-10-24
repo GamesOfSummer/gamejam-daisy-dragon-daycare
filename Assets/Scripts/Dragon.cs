@@ -175,15 +175,20 @@ public class Dragon : MonoBehaviour {
         while (!canBeReleased ()) {
             EnableCorrectMoodIcon ();
 
-            if (patienceMeter >.5F && patienceMeter < .8F) {
-                if (Random.Range (0, 4) < 2) {
+            if (patienceMeter >.5F && patienceMeter < .9F) {
+                if (chanceToGetAStatusAilment < .1F) {
                     Poop ();
                 } else {
-                    AddStatusAilment ();
+                    if (Random.Range (0, 4) <= 1) {
+                        Poop ();
+                    } else {
+                        AddStatusAilment ();
+                    }
                 }
+
             }
 
-            yield return new WaitForSeconds (3.0F);
+            yield return new WaitForSeconds (2.0F);
         }
     }
 
@@ -219,7 +224,7 @@ public class Dragon : MonoBehaviour {
         hotIcon.enabled = false;
         hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
         coldIcon.enabled = false;
-        hotParticleEffect.GetComponent<ParticleSystem> ().Stop ();
+        coldParticleEffect.GetComponent<ParticleSystem> ().Stop ();
     }
 
     bool hasPooped = false;
@@ -268,27 +273,22 @@ public class Dragon : MonoBehaviour {
     }
 
     private float CalculateMood () {
+        if (NeedToCleanupPoop () || status != StatusAilment.None || hungerMeter < .3F) {
+            return 0;
+        }
+
         var mood = 1.0F;
 
-        if (status != StatusAilment.None) {
-            mood -= .5F;
-        }
-        if (NeedToCleanupPoop ()) {
-            return 0;
-        }
-
-        if (hungerMeter < .3F) {
-            return 0;
-        } else if (hungerMeter >.7F) {
+        if (hungerMeter >.7F) {
             mood += .5F;
         }
 
         if (hasBeenPetOnce == true) {
-            mood += 2.5F;
+            mood += 1.5F;
         }
 
         if (hasBeenFedFavoriteFoodOnce == true) {
-            mood += 2.5F;
+            mood += 1.5F;
         }
 
         return mood;
