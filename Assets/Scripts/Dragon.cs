@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,6 +59,10 @@ public class Dragon : MonoBehaviour {
     private Slider hungrySlider;
     private Slider patientTimer;
 
+    private bool startedCountdown;
+    private TextMeshProUGUI thankyouText;
+    private TextMeshProUGUI countdownText;
+
     private bool mouseIsCurrentlyOnMe = false;
     private bool hasBeenPetOnce = false;
 
@@ -115,7 +120,24 @@ public class Dragon : MonoBehaviour {
             if (fill != null) {
                 fill.color = Color.green;
             }
+
+            if (!startedCountdown) {
+                startedCountdown = true;
+                thankyouText.enabled = true;
+                countdownText.enabled = true;
+                StartCoroutine (StartCoRoutineToRelease ());
+            }
         }
+    }
+
+    private IEnumerator StartCoRoutineToRelease () {
+        countdownText.text = "3";
+        yield return new WaitForSeconds (1.0f);
+        countdownText.text = "2";
+        yield return new WaitForSeconds (1.0f);
+        countdownText.text = "1";
+        yield return new WaitForSeconds (1.0f);
+        GameController.Instance.ReleaseDragon (this);
     }
 
     private void OnTriggerEnter (Collider other) {
@@ -150,11 +172,11 @@ public class Dragon : MonoBehaviour {
 
             hasBeenPetOnce = true;
 
-            if (!heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
+            if (status != StatusAilment.None || !heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
                 heartsParticleEffect.GetComponent<ParticleSystem> ().Play ();
             }
 
-        } else if (heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
+        } else if (status != StatusAilment.None || heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
             heartsParticleEffect.GetComponent<ParticleSystem> ().Stop ();
         }
     }
@@ -198,7 +220,6 @@ public class Dragon : MonoBehaviour {
     private void AddStatusAilment () {
 
         if (!hasGottenAStatusAilment) {
-
             if (Random.Range (0.0F, 1.0F) < chanceToGetAStatusAilment) {
                 hasGottenAStatusAilment = true;
                 sickIcon.enabled = true;
@@ -308,9 +329,6 @@ public class Dragon : MonoBehaviour {
         } else if (type == dislikedFood) {
             feedDragonDislikedFood ();
             StartCoroutine (DragonMoodSFX (notPleased));
-
-        } else {
-            feedDragon ();
         }
     }
 
@@ -329,15 +347,14 @@ public class Dragon : MonoBehaviour {
         }
     }
 
-    private void feedDragon () {
-        hungerMeter += hungerIncreaseWhenFed;
-    }
-
     private void feedDragonDislikedFood () {
         hasBeenFedWrongFood = true;
         patienceMeter -= patienceIncreaseBonus;
+
         hungerMeter = 0;
-    }
+
+        hungerMeter -= hungerIncreaseWhenFed;
+
 
     public int CaluclateFinalScore () {
 
@@ -369,6 +386,10 @@ public class Dragon : MonoBehaviour {
 
         hungrySlider = canvas.hungrySlider;
         patientTimer = canvas.patientTimer;
+
+        thankyouText = canvas.thankyouText;
+        countdownText = canvas.countdownText;
+
         StartCoroutine (ProcessEmotions ());
         StartCoroutine (DragonSpawnSFX (chirp1));
     }
@@ -407,6 +428,11 @@ public class Dragon : MonoBehaviour {
             happyIcon.enabled = false;
             sadIcon.enabled = false;
             sickIcon.enabled = false;
+
+            startedCountdown = false;
+            thankyouText.enabled = false;
+            countdownText.text = "3";
+            countdownText.enabled = false;
 
             hasBeenPetOnce = false;
             hasPooped = false;

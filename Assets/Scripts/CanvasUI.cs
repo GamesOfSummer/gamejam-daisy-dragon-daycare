@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CanvasUI : MonoBehaviour {
@@ -14,4 +15,6 @@ public class CanvasUI : MonoBehaviour {
     public Slider hungrySlider;
     public Slider patientTimer;
 
+    public TextMeshProUGUI thankyouText;
+    public TextMeshProUGUI countdownText;
 }

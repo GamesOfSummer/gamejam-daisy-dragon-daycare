@@ -214,8 +214,8 @@ public class GameController : MonoBehaviour {
         dragon.GetComponent<Dragon> ().StartDragon ();
     }
 
-    public void ReleaseDragon () {
-        var dragon = _player.GetComponent<PlayerController> ().GetCurrentDragon ();
+    public void ReleaseDragon (Dragon dragon) {
+        //var dragon = _player.GetComponent<PlayerController> ().GetCurrentDragon ();
 
         if (dragon != null && dragon.GetComponent<Dragon> ().canBeReleased ()) {
 
@@ -228,7 +228,7 @@ public class GameController : MonoBehaviour {
                 }
             }
 
-            _pool.releaseObject (dragon);
+            _pool.releaseObject (dragon.gameObject);
             _player.GetComponent<PlayerController> ().ReleaseDragon ();
             TurnOffReleaseButton ();
 
