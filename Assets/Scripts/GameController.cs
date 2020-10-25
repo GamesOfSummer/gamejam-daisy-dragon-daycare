@@ -76,7 +76,6 @@ public class GameController : MonoBehaviour {
 
     bool tutorialActive1 = false;
     bool tutorialActive2 = false;
-    private bool gameInProgress = false;
 
     //Present Drop System Variables
     public float presentDropChance = 25f;
@@ -105,7 +104,6 @@ public class GameController : MonoBehaviour {
     void Update () {
         if (GameState.Instance.IsCurrentStateTitle () && Input.GetMouseButton (0)) {
             if (tutorialActive1 != true && tutorialActive2 != true) {
-                gameInProgress = true;
                 GameState.Instance.ChangeState_Play ();
                 Debug.Log (tutorialActive1 + " " + tutorialActive2);
                 ToggleGameplayUI ();
@@ -114,7 +112,7 @@ public class GameController : MonoBehaviour {
         }
 
         if (Input.GetKeyDown (KeyCode.H)) {
-            if (gameInProgress != true) {
+            if (!GameState.Instance.IsCurrentStatePlay ()) {
                 Debug.Log ("H key pressed");
                 if (tutorialActive1 == false) {
                     tutorialScreenUIPg1.SetActive (true);
@@ -324,7 +322,6 @@ public class GameController : MonoBehaviour {
         titleScreenUI.SetActive (false);
         gameScreenUI.SetActive (true);
         TurnOffReleaseButton ();
-        gameInProgress = true;
     }
 
     public void ToggleEndUI () {

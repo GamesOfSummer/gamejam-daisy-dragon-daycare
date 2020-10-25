@@ -59,9 +59,9 @@ public class Dragon : MonoBehaviour {
     private Slider patientTimer;
 
     private bool mouseIsCurrentlyOnMe = false;
-
-    private bool beingPet = false;
     private bool hasBeenPetOnce = false;
+
+    private bool hasBeenFedWrongFood = false;
 
     private bool hasBeenFedFavoriteFoodOnce = false;
 
@@ -133,6 +133,10 @@ public class Dragon : MonoBehaviour {
 
     private void OnTriggerStay (Collider other) {
 
+        if (other.tag == "Player") {
+            _player = gameObject;
+        }
+
         if (_player != null && mouseIsCurrentlyOnMe) {
 
             Vector2 screenPosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
@@ -148,7 +152,6 @@ public class Dragon : MonoBehaviour {
 
             if (!heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
                 heartsParticleEffect.GetComponent<ParticleSystem> ().Play ();
-                beingPet = true;
             }
 
         } else if (heartsParticleEffect.GetComponent<ParticleSystem> ().isPlaying) {
@@ -157,7 +160,6 @@ public class Dragon : MonoBehaviour {
     }
 
     private void OnTriggerExit (Collider other) {
-        beingPet = false;
         _player = null;
         Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
     }
@@ -188,7 +190,7 @@ public class Dragon : MonoBehaviour {
 
             }
 
-            yield return new WaitForSeconds (2.0F);
+            yield return new WaitForSeconds (0.5F);
         }
     }
 
@@ -332,11 +334,17 @@ public class Dragon : MonoBehaviour {
     }
 
     private void feedDragonDislikedFood () {
+        hasBeenFedWrongFood = true;
         patienceMeter -= patienceIncreaseBonus;
-        hungerMeter += hungerIncreaseWhenFed;
+        hungerMeter = 0;
     }
 
     public int CaluclateFinalScore () {
+
+        if (hasBeenFedWrongFood) {
+            return 0;
+        }
+
         int startScore = 10;
 
         if (hasBeenPetOnce) {
@@ -406,6 +414,7 @@ public class Dragon : MonoBehaviour {
             hasGottenAStatusAilment = false;
 
             hasBeenFedFavoriteFoodOnce = false;
+            hasBeenFedWrongFood = false;
 
             _player = null;
             mouseIsCurrentlyOnMe = false;
