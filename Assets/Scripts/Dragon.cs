@@ -354,7 +354,7 @@ public class Dragon : MonoBehaviour {
         hungerMeter = 0;
 
         hungerMeter -= hungerIncreaseWhenFed;
-
+    }
 
     public int CaluclateFinalScore () {
 
