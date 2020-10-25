@@ -46,6 +46,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -127,7 +128,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.67
+  m_Radius: 0.18
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &6469355263136289468
 SphereCollider:
@@ -170,4 +171,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff5b8df4dec40743b619658a6b9d13f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ease: 0.15
