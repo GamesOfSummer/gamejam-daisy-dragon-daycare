@@ -444,12 +444,7 @@ public class Dragon : MonoBehaviour {
 
             _player = null;
             mouseIsCurrentlyOnMe = false;
-
-            GameController.Instance.TurnOffReleaseButton ();
-        } else {
-            //            Debug.Log ("Null values on reset dragon");
         }
-
     }
 
     public IEnumerator DragonSpawnSFX (int sfxToPlay) {
