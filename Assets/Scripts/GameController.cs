@@ -71,7 +71,6 @@ public class GameController : MonoBehaviour {
 
     private GameObject _player;
 
-    public GameObject releaseDragonButton;
     private bool allDragonsSpawned = false;
 
     bool tutorialActive1 = false;
@@ -230,7 +229,6 @@ public class GameController : MonoBehaviour {
 
             _pool.releaseObject (dragon.gameObject);
             _player.GetComponent<PlayerController> ().ReleaseDragon ();
-            TurnOffReleaseButton ();
 
             if (isGameOver ()) {
                 GameState.Instance.ChangeState_End ();
@@ -321,7 +319,7 @@ public class GameController : MonoBehaviour {
     public void ToggleGameplayUI () {
         titleScreenUI.SetActive (false);
         gameScreenUI.SetActive (true);
-        TurnOffReleaseButton ();
+
     }
 
     public void ToggleEndUI () {
@@ -362,14 +360,10 @@ public class GameController : MonoBehaviour {
         titleScreenUI.SetActive (true);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
-        releaseDragonButton.SetActive (false);
 
         titleScreenUI.SetActive (true);
         gameScreenUI.SetActive (false);
         endScreenUI.SetActive (false);
-
-        TurnOffReleaseButton ();
-
     }
 
     public GameObject SpawnObject (GameObject obj) {
@@ -378,14 +372,6 @@ public class GameController : MonoBehaviour {
 
     public void ReleaseObject (GameObject obj) {
         _pool.releaseObject (obj);
-    }
-
-    public void TurnOnReleaseButton () {
-        releaseDragonButton.SetActive (true);
-    }
-
-    public void TurnOffReleaseButton () {
-        releaseDragonButton.SetActive (false);
     }
 
     public void ResetMouseCursor () {
