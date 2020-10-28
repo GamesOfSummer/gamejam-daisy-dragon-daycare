@@ -473,7 +473,9 @@ public class Dragon : MonoBehaviour {
 
         int timeToWait = (0);
         yield return new WaitForSeconds (timeToWait);
-        audioSource.PlayOneShot (sfx[sfxToPlay], 1f);
+        audioSource.clip = sfx[sfxToPlay];
+        audioSource.loop = false;
+        audioSource.Play();
         Debug.Log ("Played " + sfx[sfxToPlay] + " after waiting for " + timeToWait + " seconds!");
         Debug.Log (gameObject.name);
 
