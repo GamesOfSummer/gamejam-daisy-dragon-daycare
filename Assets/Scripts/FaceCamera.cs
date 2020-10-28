@@ -1,15 +1,8 @@
 ﻿using UnityEngine;
-public class FaceCamera : MonoBehaviour {
-
-    Transform _transform;
-
-    void Awake () {
-        _transform = transform;
-    }
-
-    //Orient the camera after all movement is completed this frame to avoid jittering
-    void LateUpdate () {
-        transform.LookAt (transform.position + Camera.main.transform.rotation * Vector3.forward,
-            Camera.main.transform.rotation * Vector3.up);
-    }
+public class FaceCamera : MonoBehaviour
+{
+	void LateUpdate()
+	{
+		transform.rotation = Camera.main.transform.rotation;
+	}
 }

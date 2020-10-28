@@ -53,8 +53,10 @@ MonoBehaviour:
       DragonsToSpawn:
       - {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a, type: 3}
       - {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a, type: 3}
+      - {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a, type: 3}
     - roundName: '** 1 Berry Dragon - Easy'
       DragonsToSpawn:
+      - {fileID: 6269631408664805780, guid: b131608d97d601043a9893fa0bb1a1e6, type: 3}
       - {fileID: 6269631408664805780, guid: b131608d97d601043a9893fa0bb1a1e6, type: 3}
     - roundName: '** 1 Berry Dragon - Easy'
       DragonsToSpawn:
@@ -66,7 +68,8 @@ MonoBehaviour:
     - roundName: '** 1 Berry Dragon - Easy'
       DragonsToSpawn:
       - {fileID: 6269631408664805780, guid: 91c628051aa40ee4f858518c4748f94f, type: 3}
-      - {fileID: 6269631408664805780, guid: 50bdeadc31fd1e946bf2dd8f207e920a, type: 3}
+      - {fileID: 6269631408664805780, guid: 91c628051aa40ee4f858518c4748f94f, type: 3}
+      - {fileID: 6269631408664805780, guid: 91c628051aa40ee4f858518c4748f94f, type: 3}
     - roundName: '** 1 Berry Dragon - Easy'
       DragonsToSpawn:
       - {fileID: 6269631408664805780, guid: 91c628051aa40ee4f858518c4748f94f, type: 3}
@@ -84,7 +87,6 @@ MonoBehaviour:
   berriesFood: {fileID: 4197952399141807276, guid: 580fa9f904088364cae2e15b65cd6cdf,
     type: 3}
   mouseHandImage: {fileID: 2800000, guid: bea65a62769834044bf01220bcf57278, type: 3}
-  releaseDragonButton: {fileID: 0}
   presentDropChance: 75
   presentPool:
   - {fileID: 8144619689502701082, guid: f128b93a4e707dd48857733b9b0c17d9, type: 3}
